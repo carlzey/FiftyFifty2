@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FiftyFifty2</string>
+    <string name="app_name">FiftyFifty</string>
+    <string name="title_FiftyFifty">FiftyFifty</string>
+    <string name="first_Hint">First Choice</string>
+    <string name="second_Hint">Second Choice</string>
+    <string name="error_text">You\'ll have to enter both TextFields!</string>
+    <string name="button">Fifty/Fifty</string>
 </resources>
