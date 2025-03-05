@@ -19,10 +19,11 @@ class Motor : ComponentActivity() {
 
         // Get the selected option from the intent
         val selectedOption = intent.getStringExtra("EXTRA_MESSAGE") ?: "" // fixar fel
+        val source = intent.getStringExtra("SOURCE") ?: "" // SÅ DEN VET VAR DEN KOMMER FRÅN//tabort??????
 
         setContent {
             // Set the content of the activity
-        MotorView(selectedOption) //todo kan vara fel helt borta :D
+        MotorView(selectedOption, source) // lagt till source//tabort??????
         }
 
     }
@@ -34,7 +35,7 @@ class Motor : ComponentActivity() {
  *
  */
 @Composable
-fun MotorView(selectedOption: String) { // Tar emot valda option
+fun MotorView(selectedOption: String, source: String) { // Tar emot valda option +även source!//tabort??????
     val context = LocalContext.current
 
     Column(
@@ -55,10 +56,27 @@ fun MotorView(selectedOption: String) { // Tar emot valda option
         // Dela upp? todo vad?
         Spacer(modifier = Modifier.height(24.dp))
 
+        /**
+         * OK
+         * lägg till om flera senare
+         * else if (source == "FiftyFifty") { // Om den kom från FiftyFifty
+         */
         Button(
             onClick = {
+                if (source == "MoreChoices") { // Om den kom från MoreChoices//tabort??????
+
+                    val intent = Intent(context, MainActivity::class.java).apply {
+                        putExtra("NAVIGATE_TO", "MoreChoices") // Lägger till extra för att gå till MoreChoices
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP // Tar bort tidigare aktiviteter
+                    }
+                    context.startActivity(intent) // Starta MoreChoices//tabort??????
+                } // if
+                else { // Om den kom från FiftyFifty
+                    context.startActivity(Intent(context, MainActivity::class.java))//tabort??????
+                }
                 // Klicka för att gå tillbaka till Start
-                context.startActivity(Intent(context, MainActivity::class.java))
+                //SÄTT IN IGEN?!!!!!!!!!!!!!!
+                //context.startActivity(Intent(context, MainActivity::class.java))
             }
         ) {
             Text("Go back")

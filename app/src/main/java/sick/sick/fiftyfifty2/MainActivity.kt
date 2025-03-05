@@ -23,10 +23,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.SemanticsProperties.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController // ny
+
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
@@ -38,14 +44,23 @@ class MainActivity : ComponentActivity() {
          *
          * vi använder compose istället för xml
          */
-        setContent {
-            FiftyFiftyView()
+        // KOK
+        //tabort??????
+        val navigateTo = intent.getStringExtra("NAVIGATE_TO") ?: "FiftyFifty"//tabort??????
+        setContent { //tabort??????
+            FiftyFiftyApp(startDestination = navigateTo) // fixat startdestination
         }
     }
 }
 
+/**
+ *  @Composable betyder att den är en composable funktion
+ *  fixat fel här navcontroller
+ *  mer ? för composable funktion och navcontroller
+ *  Kaffe?!
+ */
 @Composable // Annotering för att den är en composable funktion
-fun FiftyFiftyView() {
+fun FiftyFiftyView(navController: NavController) {
     // håller användarens inmatade texter
     var firstOption by remember { mutableStateOf("") } // State för första val
     var secondOption by remember { mutableStateOf("") } // State för andra val
@@ -101,6 +116,7 @@ fun FiftyFiftyView() {
                     //starta motor med valda option
                     val intent = Intent(context, Motor::class.java).apply {
                         putExtra("EXTRA_MESSAGE", selectedOption) // skickar valda option till motor
+                        putExtra("SOURCE", "FiftyFifty") // SKA MED TILL MOTOR FÖR SKICKA //tabort??????RÄTT TIBLAKA!!!!!!!!!!!!
                     }
                     context.startActivity(intent) // starta motor med valda option som extra
                 }
@@ -125,3 +141,88 @@ fun FiftyFiftyView() {
 }
 }
 
+/**
+ *  bottom navigation bar
+ *  "@Composable" betyder att det är en composable funktion
+ *   @param navController - Navcontroller för att hantera navigering och state
+ */
+@Composable
+fun FiftyFiftyApp(startDestination: String) { // fixat startdestination
+    val navController = rememberNavController() // navigering  todo kolla om det fungerar
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navController)
+        }
+    ) { innerPadding ->
+        NavHost( // gör navigering
+            navController = navController, // navcontroller för att hantera navigering och state
+            //startDestination = "FiftyFifty", // start sida är home§
+            startDestination = startDestination, // start sida är FiftyFifty
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable("FiftyFifty") { FiftyFiftyView(navController) }
+            composable("MoreChoices") { MoreChoices() } // nya sida för val av alternativ i motor?
+            composable("Roulette") { Roulette() } // roulette är en ny sida
+            composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
+        }
+    }
+}
+
+/**
+ *  bottom navigation bar för att navigera mellan sidorna i appen med Material Design
+ *
+ *
+ *  Ändrat till NavigationbarItem istället för NavigationBarItem för att få det att fungera
+ */
+@Composable
+fun BottomNavigationBar(navController: NavController) {
+    NavigationBar { // navigering 1-3
+        NavigationBarItem( // item 1
+            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "FiftyFifty") }, // ikon
+            label = { Text("FiftyFifty") }, // namn på sida
+            selected = navController.currentDestination?.route == "FiftyFifty", // kolla om sidan är valda
+            onClick = { navController.navigate("FiftyFifty") } // navigerar till FiftyFifty
+        )
+        // lägg till fler navigeringar här om det behövs
+        NavigationBarItem(
+            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "MoreChoices") },
+            label = { Text("MoreChoices") },
+            selected = navController.currentDestination?.route == "MoreChoices",
+            onClick = { navController.navigate("MoreChoices") }
+        )
+        // lägg till fler navigeringar här om det behövs
+        NavigationBarItem(
+            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "Roulette") },
+            label = { Text("Roulette") },
+            selected = navController.currentDestination?.route == "Roulette",
+            onClick = { navController.navigate("Roulette") }
+        )
+        NavigationBarItem(
+            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "Inställningar") },
+            label = { Text("Inställningar") },
+            selected = navController.currentDestination?.route == "Inställningar",
+            onClick = { navController.navigate("Inställningar") }
+        )
+    }
+}
+@Composable
+fun MoreChoices() {
+    Text(text = "MoreanChoices")
+    moreChoicesView() // visa nya alternativ i motor
+    /**
+     * morechoices är en ny sida som visar alternativ som användaren kan välja fler gånger
+     * med mer och mer alternativ som visas i en lista eller en grid.
+     * Bra att skriva mer info om vad som händer här
+     * Tack
+     */
+}
+
+@Composable
+fun Roulette() {
+    Text(text = "Roulette")
+}
+
+@Composable
+fun SettingsScreen() {
+    Text(text = "Roulette")
+}
