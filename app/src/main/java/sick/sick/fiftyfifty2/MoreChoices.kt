@@ -100,11 +100,5 @@ fun moreChoicesView() {
             // go
             Text("Slumpa :D")
         }
-        if (valdText.value.isNotBlank()) {
-            Text("Valt alternativ: ${valdText.value}", fontSize = 24.sp, modifier = Modifier.padding(top = 16.dp))
-        }
-//        valdText?.let { // kolla om valdText inte är null
-//            Text("Valt alternativ: $it", fontSize = 24.sp, modifier = Modifier.padding(top = 16.dp))
-//        }
     }
 }

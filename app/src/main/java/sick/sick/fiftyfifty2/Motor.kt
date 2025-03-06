@@ -19,23 +19,20 @@ class Motor : ComponentActivity() {
 
         // Get the selected option from the intent
         val selectedOption = intent.getStringExtra("EXTRA_MESSAGE") ?: "" // fixar fel
-        val source = intent.getStringExtra("SOURCE") ?: "" // SÅ DEN VET VAR DEN KOMMER FRÅN//tabort??????
+        val source = intent.getStringExtra("SOURCE") ?: "" // SÅ DEN VET VAR DEN KOMMER FRÅN
 
         setContent {
             // Set the content of the activity
         MotorView(selectedOption, source) // lagt till source//tabort??????
         }
-
     }
-
-
 }
 
 /**
  *
  */
 @Composable
-fun MotorView(selectedOption: String, source: String) { // Tar emot valda option +även source!//tabort??????
+fun MotorView(selectedOption: String, source: String) { // Tar emot valda option +även source!
     val context = LocalContext.current
 
     Column(
@@ -63,8 +60,7 @@ fun MotorView(selectedOption: String, source: String) { // Tar emot valda option
          */
         Button(
             onClick = {
-                if (source == "MoreChoices") { // Om den kom från MoreChoices//tabort??????
-
+                if (source == "MoreChoices") { // Om den kom från MoreChoices
                     val intent = Intent(context, MainActivity::class.java).apply {
                         putExtra("NAVIGATE_TO", "MoreChoices") // Lägger till extra för att gå till MoreChoices
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TOP // Tar bort tidigare aktiviteter
@@ -72,7 +68,7 @@ fun MotorView(selectedOption: String, source: String) { // Tar emot valda option
                     context.startActivity(intent) // Starta MoreChoices//tabort??????
                 } // if
                 else { // Om den kom från FiftyFifty
-                    context.startActivity(Intent(context, MainActivity::class.java))//tabort??????
+                    context.startActivity(Intent(context, MainActivity::class.java))
                 }
                 // Klicka för att gå tillbaka till Start
                 //SÄTT IN IGEN?!!!!!!!!!!!!!!

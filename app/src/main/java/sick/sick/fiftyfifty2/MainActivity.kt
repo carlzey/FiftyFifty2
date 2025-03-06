@@ -44,10 +44,8 @@ class MainActivity : ComponentActivity() {
          *
          * vi använder compose istället för xml
          */
-        // KOK
-        //tabort??????
-        val navigateTo = intent.getStringExtra("NAVIGATE_TO") ?: "FiftyFifty"//tabort??????
-        setContent { //tabort??????
+        val navigateTo = intent.getStringExtra("NAVIGATE_TO") ?: "FiftyFifty"
+        setContent {
             FiftyFiftyApp(startDestination = navigateTo) // fixat startdestination
         }
     }
@@ -116,7 +114,7 @@ fun FiftyFiftyView(navController: NavController) {
                     //starta motor med valda option
                     val intent = Intent(context, Motor::class.java).apply {
                         putExtra("EXTRA_MESSAGE", selectedOption) // skickar valda option till motor
-                        putExtra("SOURCE", "FiftyFifty") // SKA MED TILL MOTOR FÖR SKICKA //tabort??????RÄTT TIBLAKA!!!!!!!!!!!!
+                        putExtra("SOURCE", "FiftyFifty") // SKA MED TILL MOTOR FÖR SKICKA om man vill ha source
                     }
                     context.startActivity(intent) // starta motor med valda option som extra
                 }
@@ -147,7 +145,7 @@ fun FiftyFiftyView(navController: NavController) {
  *   @param navController - Navcontroller för att hantera navigering och state
  */
 @Composable
-fun FiftyFiftyApp(startDestination: String) { // fixat startdestination
+fun FiftyFiftyApp(startDestination: String) { // fixat startdestination//@#LOL xD  tog bort navcontroller
     val navController = rememberNavController() // navigering  todo kolla om det fungerar
     Scaffold(
         bottomBar = {
@@ -156,13 +154,12 @@ fun FiftyFiftyApp(startDestination: String) { // fixat startdestination
     ) { innerPadding ->
         NavHost( // gör navigering
             navController = navController, // navcontroller för att hantera navigering och state
-            //startDestination = "FiftyFifty", // start sida är home§
             startDestination = startDestination, // start sida är FiftyFifty
             modifier = Modifier.padding(innerPadding)
         ) {
             composable("FiftyFifty") { FiftyFiftyView(navController) }
             composable("MoreChoices") { MoreChoices() } // nya sida för val av alternativ i motor?
-            composable("Roulette") { Roulette() } // roulette är en ny sida
+            composable("Roulette") { RouletteScreen() } // roulette är en ny sida
             composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
         }
     }
@@ -220,6 +217,7 @@ fun MoreChoices() {
 @Composable
 fun Roulette() {
     Text(text = "Roulette")
+    RouletteScreen()
 }
 
 @Composable
