@@ -1,0 +1,391 @@
+kotlin version: 2.0.0
+error message: org.jetbrains.kotlin.backend.common.BackendException: Backend Internal error: Exception during IR lowering
+File being compiled: D:/android/FiftyFifty2/app/src/main/java/sick/sick/fiftyfifty2/Roulette.kt
+The root cause java.lang.RuntimeException was thrown at: org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:50)
+	at org.jetbrains.kotlin.backend.common.CodegenUtil.reportBackendException(CodegenUtil.kt:253)
+	at org.jetbrains.kotlin.backend.common.CodegenUtil.reportBackendException$default(CodegenUtil.kt:236)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invokeSequential(performByIrFile.kt:65)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invoke(performByIrFile.kt:52)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invoke(performByIrFile.kt:38)
+	at org.jetbrains.kotlin.backend.common.phaser.NamedCompilerPhase.phaseBody(CompilerPhase.kt:166)
+	at org.jetbrains.kotlin.backend.common.phaser.AbstractNamedCompilerPhase.invoke(CompilerPhase.kt:113)
+	at org.jetbrains.kotlin.backend.common.phaser.CompositePhase.invoke(PhaseBuilders.kt:29)
+	at org.jetbrains.kotlin.backend.common.phaser.CompositePhase.invoke(PhaseBuilders.kt:16)
+	at org.jetbrains.kotlin.backend.common.phaser.NamedCompilerPhase.phaseBody(CompilerPhase.kt:166)
+	at org.jetbrains.kotlin.backend.common.phaser.AbstractNamedCompilerPhase.invoke(CompilerPhase.kt:113)
+	at org.jetbrains.kotlin.backend.common.phaser.CompilerPhaseKt.invokeToplevel(CompilerPhase.kt:62)
+	at org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory.invokeCodegen(JvmIrCodegenFactory.kt:371)
+	at org.jetbrains.kotlin.codegen.CodegenFactory.generateModule(CodegenFactory.kt:47)
+	at org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory.generateModuleInFrontendIRMode(JvmIrCodegenFactory.kt:433)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.generateCodeFromIr(jvmCompilerPipeline.kt:241)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.compileModulesUsingFrontendIrAndLightTree(jvmCompilerPipeline.kt:140)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:155)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:50)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:104)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:48)
+	at org.jetbrains.kotlin.cli.common.CLITool.exec(CLITool.kt:101)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:453)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:62)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.doCompile(IncrementalCompilerRunner.kt:506)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compileImpl(IncrementalCompilerRunner.kt:423)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally$lambda$9$compile(IncrementalCompilerRunner.kt:249)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally(IncrementalCompilerRunner.kt:267)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compile(IncrementalCompilerRunner.kt:120)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.execIncrementalCompiler(CompileServiceImpl.kt:676)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.access$execIncrementalCompiler(CompileServiceImpl.kt:92)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.compile(CompileServiceImpl.kt:1661)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.RuntimeException: Exception while generating code for:
+FUN LOCAL_FUNCTION_FOR_LAMBDA name:RouletteScreen$lambda$13$lambda$11$lambda$10 visibility:private modality:FINAL <> ($options:kotlin.collections.List<kotlin.String>, $this$Canvas:androidx.compose.ui.graphics.drawscope.DrawScope) returnType:kotlin.Unit?
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$options index:0 type:kotlin.collections.List<kotlin.String>
+  VALUE_PARAMETER name:$this$Canvas index:1 type:androidx.compose.ui.graphics.drawscope.DrawScope
+  BLOCK_BODY
+    VAR name:sliceAngle type:kotlin.Float [val]
+      CALL 'public final fun div (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=DIV
+        $this: CONST Float type=kotlin.Float value=360.0
+        other: CALL 'public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List' type=kotlin.Int origin=GET_PROPERTY
+          $this: GET_VAR '$options: kotlin.collections.List<kotlin.String> declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10' type=kotlin.collections.List<kotlin.String> origin=null
+    CALL 'public final fun forEachIndexed <T> (action: kotlin.Function2<@[ParameterName(name = "index")] kotlin.Int, T of kotlin.collections.CollectionsKt.forEachIndexed, kotlin.Unit>): kotlin.Unit [inline] declared in kotlin.collections.CollectionsKt' type=kotlin.Unit origin=null
+      <T>: kotlin.String
+      $receiver: GET_VAR '$options: kotlin.collections.List<kotlin.String> declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10' type=kotlin.collections.List<kotlin.String> origin=null
+      action: BLOCK type=kotlin.Function2<@[ParameterName(name = "index")] kotlin.Int, kotlin.String, kotlin.Unit> origin=LAMBDA
+        COMPOSITE type=kotlin.Unit origin=null
+        FUNCTION_REFERENCE 'private final fun RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9 ($this_Canvas: androidx.compose.ui.graphics.drawscope.DrawScope, $sliceAngle: kotlin.Float, index: @[ParameterName(name = "index")] kotlin.Int, option: kotlin.String): kotlin.Unit declared in sick.sick.fiftyfifty2.RouletteKt' type=kotlin.Function2<@[ParameterName(name = "index")] kotlin.Int, kotlin.String, kotlin.Unit> origin=INLINE_LAMBDA reflectionTarget=null
+          $this_Canvas: GET_VAR '$this$Canvas: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+          $sliceAngle: GET_VAR 'val sliceAngle: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10' type=kotlin.Float origin=null
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:50)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate$default(FunctionCodegen.kt:42)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generateMethodNode(ClassCodegen.kt:385)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generateMethod(ClassCodegen.kt:402)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generate(ClassCodegen.kt:169)
+	at org.jetbrains.kotlin.backend.jvm.FileCodegen.lower(JvmPhases.kt:41)
+	at org.jetbrains.kotlin.backend.common.phaser.PhaseBuildersKt.makeIrFilePhase$lambda$5(PhaseBuilders.kt:114)
+	at org.jetbrains.kotlin.backend.common.phaser.PhaseBuildersKt$createSimpleNamedCompilerPhase$1.phaseBody(PhaseBuilders.kt:71)
+	at org.jetbrains.kotlin.backend.common.phaser.SimpleNamedCompilerPhase.phaseBody(CompilerPhase.kt:226)
+	at org.jetbrains.kotlin.backend.common.phaser.AbstractNamedCompilerPhase.invoke(CompilerPhase.kt:113)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invokeSequential(performByIrFile.kt:62)
+	... 44 more
+Caused by: java.lang.RuntimeException: Exception while generating code for:
+FUN INLINE_LAMBDA name:RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9 visibility:private modality:FINAL <> ($this_Canvas:androidx.compose.ui.graphics.drawscope.DrawScope, $sliceAngle:kotlin.Float, index:@[ParameterName(name = "index")] kotlin.Int, option:kotlin.String) returnType:kotlin.Unit
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$this_Canvas index:0 type:androidx.compose.ui.graphics.drawscope.DrawScope
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$sliceAngle index:1 type:kotlin.Float
+  VALUE_PARAMETER name:index index:2 type:@[ParameterName(name = "index")] kotlin.Int
+  VALUE_PARAMETER name:option index:3 type:kotlin.String
+  BLOCK_BODY
+    VAR name:$i$a$-forEachIndexed-RouletteKt$RouletteScreen$1$1$1$1 type:kotlin.Int [val]
+      CONST Int type=kotlin.Int value=0
+    CALL 'public final fun rotate-Rg1IO4c$default (degrees: kotlin.Float, pivot: androidx.compose.ui.geometry.Offset, block: @[ExtensionFunctionType] kotlin.Function1<androidx.compose.ui.graphics.drawscope.DrawScope, kotlin.Unit>, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Unit [inline] declared in androidx.compose.ui.graphics.drawscope.DrawScopeKt' type=kotlin.Unit origin=DEFAULT_DISPATCH_CALL
+      $receiver: GET_VAR '$this_Canvas: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+      degrees: CALL 'public final fun times (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+        $this: GET_VAR '$sliceAngle: kotlin.Float declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9' type=kotlin.Float origin=null
+        other: GET_VAR 'index: @[ParameterName(name = "index")] kotlin.Int declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9' type=@[ParameterName(name = "index")] kotlin.Int origin=null
+      pivot: COMPOSITE type=androidx.compose.ui.geometry.Offset origin=DEFAULT_VALUE
+        CALL 'public final fun <unsafe-coerce> <T, R> (v: T of kotlin.jvm.internal.<unsafe-coerce>): R of kotlin.jvm.internal.<unsafe-coerce> declared in kotlin.jvm.internal' type=androidx.compose.ui.geometry.Offset origin=null
+          <T>: kotlin.Long
+          <R>: androidx.compose.ui.geometry.Offset
+          v: CONST Long type=kotlin.Long value=0
+      block: BLOCK type=@[ExtensionFunctionType] kotlin.Function1<androidx.compose.ui.graphics.drawscope.DrawScope, kotlin.Unit> origin=LAMBDA
+        COMPOSITE type=kotlin.Unit origin=null
+        FUNCTION_REFERENCE 'private final fun RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8 ($sliceAngle: kotlin.Float, $index: @[ParameterName(name = "index")] kotlin.Int, $option: kotlin.String): kotlin.Unit declared in sick.sick.fiftyfifty2.RouletteKt' type=@[ExtensionFunctionType] kotlin.Function1<androidx.compose.ui.graphics.drawscope.DrawScope, kotlin.Unit> origin=INLINE_LAMBDA reflectionTarget=null
+          $sliceAngle: GET_VAR '$sliceAngle: kotlin.Float declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9' type=kotlin.Float origin=null
+          $index: GET_VAR 'index: @[ParameterName(name = "index")] kotlin.Int declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9' type=@[ParameterName(name = "index")] kotlin.Int origin=null
+          $option: GET_VAR 'option: kotlin.String declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9' type=kotlin.String origin=null
+      $mask0: CONST Int type=kotlin.Int value=2
+      $handler: CONST Null type=kotlin.Any? value=null
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:50)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrSourceCompilerForInline.generateLambdaBody(IrSourceCompilerForInline.kt:67)
+	at org.jetbrains.kotlin.codegen.inline.ExpressionLambda.generateLambdaBody(LambdaInfo.kt:72)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrInlineCodegen.genValueAndPut(IrInlineCodegen.kt:99)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall$handleParameter(ExpressionCodegen.kt:610)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:638)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrCall.accept(IrCall.kt:24)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:573)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:578)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrBlockBody.accept(IrBlockBody.kt:20)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.generate(ExpressionCodegen.kt:239)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.doGenerate(FunctionCodegen.kt:121)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:46)
+	... 54 more
+Caused by: java.lang.RuntimeException: Exception while generating code for:
+FUN INLINE_LAMBDA name:RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8 visibility:private modality:FINAL <> ($receiver:androidx.compose.ui.graphics.drawscope.DrawScope, $sliceAngle:kotlin.Float, $index:@[ParameterName(name = "index")] kotlin.Int, $option:kotlin.String) returnType:kotlin.Unit
+  $receiver: VALUE_PARAMETER name:$this$rotate type:androidx.compose.ui.graphics.drawscope.DrawScope
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$sliceAngle index:0 type:kotlin.Float
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$index index:1 type:@[ParameterName(name = "index")] kotlin.Int
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$option index:2 type:kotlin.String
+  BLOCK_BODY
+    VAR name:$i$a$-rotate-Rg1IO4c$default-RouletteKt$RouletteScreen$1$1$1$1$1 type:kotlin.Int [val]
+      CONST Int type=kotlin.Int value=0
+    VAR name:startAngle type:kotlin.Float [val]
+      CALL 'public final fun times (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+        $this: GET_VAR '$sliceAngle: kotlin.Float declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+        other: GET_VAR '$index: @[ParameterName(name = "index")] kotlin.Int declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=@[ParameterName(name = "index")] kotlin.Int origin=null
+    VAR name:radius type:kotlin.Float [var]
+      CALL 'public final fun div (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=DIV
+        $this: CALL 'public final fun getMinDimension-impl (arg0: androidx.compose.ui.geometry.Size): kotlin.Float declared in androidx.compose.ui.geometry.Size' type=kotlin.Float origin=GET_PROPERTY
+          arg0: CALL 'public open fun getSize-NH-jbRc (): androidx.compose.ui.geometry.Size declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.geometry.Size origin=GET_PROPERTY
+            $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+        other: CONST Int type=kotlin.Int value=2
+    VAR name:color type:androidx.compose.ui.graphics.Color [val]
+      WHEN type=androidx.compose.ui.graphics.Color origin=IF
+        BRANCH
+          if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            arg0: CALL 'public final fun rem (other: kotlin.Int): kotlin.Int [operator] declared in kotlin.Int' type=kotlin.Int origin=PERC
+              $this: GET_VAR '$index: @[ParameterName(name = "index")] kotlin.Int declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=@[ParameterName(name = "index")] kotlin.Int origin=null
+              other: CONST Int type=kotlin.Int value=2
+            arg1: CONST Int type=kotlin.Int value=0
+          then: CALL 'public final fun getGreen-0d7_KjU (): androidx.compose.ui.graphics.Color declared in androidx.compose.ui.graphics.Color.Companion' type=androidx.compose.ui.graphics.Color origin=GET_PROPERTY
+            $this: GET_FIELD 'FIELD FIELD_FOR_OBJECT_INSTANCE name:Companion type:androidx.compose.ui.graphics.Color.Companion visibility:public [final,static]' type=androidx.compose.ui.graphics.Color.Companion origin=null
+        BRANCH
+          if: CONST Boolean type=kotlin.Boolean value=true
+          then: CALL 'public final fun getBlue-0d7_KjU (): androidx.compose.ui.graphics.Color declared in androidx.compose.ui.graphics.Color.Companion' type=androidx.compose.ui.graphics.Color origin=GET_PROPERTY
+            $this: GET_FIELD 'FIELD FIELD_FOR_OBJECT_INSTANCE name:Companion type:androidx.compose.ui.graphics.Color.Companion visibility:public [final,static]' type=androidx.compose.ui.graphics.Color.Companion origin=null
+    BLOCK type=kotlin.Unit origin=ARGUMENTS_REORDERING_FOR_CALL
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_size type:androidx.compose.ui.geometry.Size [val]
+        CALL 'public final fun Size (width: kotlin.Float, height: kotlin.Float): androidx.compose.ui.geometry.Size declared in androidx.compose.ui.geometry.SizeKt' type=androidx.compose.ui.geometry.Size origin=null
+          width: CALL 'public final fun times (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+            $this: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+            other: CONST Int type=kotlin.Int value=2
+          height: CALL 'public final fun times (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+            $this: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+            other: CONST Int type=kotlin.Int value=2
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_topLeft type:androidx.compose.ui.geometry.Offset [val]
+        CALL 'public final fun Offset (x: kotlin.Float, y: kotlin.Float): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.geometry.OffsetKt' type=androidx.compose.ui.geometry.Offset origin=null
+          x: CALL 'public final fun minus (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MINUS
+            $this: CALL 'public final fun getX-impl (arg0: androidx.compose.ui.geometry.Offset): kotlin.Float declared in androidx.compose.ui.geometry.Offset' type=kotlin.Float origin=GET_PROPERTY
+              arg0: CALL 'public open fun getCenter-F1C5BW0 (): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.geometry.Offset origin=GET_PROPERTY
+                $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+            other: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+          y: CALL 'public final fun minus (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MINUS
+            $this: CALL 'public final fun getY-impl (arg0: androidx.compose.ui.geometry.Offset): kotlin.Float declared in androidx.compose.ui.geometry.Offset' type=kotlin.Float origin=GET_PROPERTY
+              arg0: CALL 'public open fun getCenter-F1C5BW0 (): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.geometry.Offset origin=GET_PROPERTY
+                $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+            other: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+      CALL 'public final fun drawArc-yD3GUKo$default ($this: androidx.compose.ui.graphics.drawscope.DrawScope, color: androidx.compose.ui.graphics.Color, startAngle: kotlin.Float, sweepAngle: kotlin.Float, useCenter: kotlin.Boolean, topLeft: androidx.compose.ui.geometry.Offset, size: androidx.compose.ui.geometry.Size, alpha: kotlin.Float, style: androidx.compose.ui.graphics.drawscope.DrawStyle?, colorFilter: androidx.compose.ui.graphics.ColorFilter?, blendMode: androidx.compose.ui.graphics.BlendMode, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Unit declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=kotlin.Unit origin=DEFAULT_DISPATCH_CALL
+        $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+        color: GET_VAR 'val color: androidx.compose.ui.graphics.Color [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.Color origin=null
+        startAngle: GET_VAR 'val startAngle: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+        sweepAngle: GET_VAR '$sliceAngle: kotlin.Float declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+        useCenter: CONST Boolean type=kotlin.Boolean value=true
+        topLeft: GET_VAR 'val tmp1_topLeft: androidx.compose.ui.geometry.Offset [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.geometry.Offset origin=null
+        size: GET_VAR 'val tmp0_size: androidx.compose.ui.geometry.Size [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.geometry.Size origin=null
+        alpha: COMPOSITE type=kotlin.Float origin=DEFAULT_VALUE
+          CONST Float type=kotlin.Float value=0.0
+        style: COMPOSITE type=androidx.compose.ui.graphics.drawscope.DrawStyle? origin=DEFAULT_VALUE
+          CONST Null type=androidx.compose.ui.graphics.drawscope.DrawStyle? value=null
+        colorFilter: COMPOSITE type=androidx.compose.ui.graphics.ColorFilter? origin=DEFAULT_VALUE
+          CONST Null type=androidx.compose.ui.graphics.ColorFilter? value=null
+        blendMode: COMPOSITE type=androidx.compose.ui.graphics.BlendMode origin=DEFAULT_VALUE
+          CALL 'public final fun <unsafe-coerce> <T, R> (v: T of kotlin.jvm.internal.<unsafe-coerce>): R of kotlin.jvm.internal.<unsafe-coerce> declared in kotlin.jvm.internal' type=androidx.compose.ui.graphics.BlendMode origin=null
+            <T>: kotlin.Int
+            <R>: androidx.compose.ui.graphics.BlendMode
+            v: CONST Int type=kotlin.Int value=0
+        $mask0: CONST Int type=kotlin.Int value=960
+        $handler: CONST Null type=kotlin.Any? value=null
+    BLOCK type=kotlin.Unit origin=ARGUMENTS_REORDERING_FOR_CALL
+      VAR IR_TEMPORARY_VARIABLE name:tmp2_color type:androidx.compose.ui.graphics.Color [val]
+        CALL 'public final fun getWhite-0d7_KjU (): androidx.compose.ui.graphics.Color declared in androidx.compose.ui.graphics.Color.Companion' type=androidx.compose.ui.graphics.Color origin=GET_PROPERTY
+          $this: GET_FIELD 'FIELD FIELD_FOR_OBJECT_INSTANCE name:Companion type:androidx.compose.ui.graphics.Color.Companion visibility:public [final,static]' type=androidx.compose.ui.graphics.Color.Companion origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp3_size type:androidx.compose.ui.geometry.Size [val]
+        CALL 'public final fun Size (width: kotlin.Float, height: kotlin.Float): androidx.compose.ui.geometry.Size declared in androidx.compose.ui.geometry.SizeKt' type=androidx.compose.ui.geometry.Size origin=null
+          width: CALL 'public final fun times (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+            $this: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+            other: CONST Int type=kotlin.Int value=2
+          height: CALL 'public final fun times (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+            $this: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+            other: CONST Int type=kotlin.Int value=2
+      VAR IR_TEMPORARY_VARIABLE name:tmp4_topLeft type:androidx.compose.ui.geometry.Offset [val]
+        CALL 'public final fun Offset (x: kotlin.Float, y: kotlin.Float): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.geometry.OffsetKt' type=androidx.compose.ui.geometry.Offset origin=null
+          x: CALL 'public final fun minus (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MINUS
+            $this: CALL 'public final fun getX-impl (arg0: androidx.compose.ui.geometry.Offset): kotlin.Float declared in androidx.compose.ui.geometry.Offset' type=kotlin.Float origin=GET_PROPERTY
+              arg0: CALL 'public open fun getCenter-F1C5BW0 (): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.geometry.Offset origin=GET_PROPERTY
+                $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+            other: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+          y: CALL 'public final fun minus (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MINUS
+            $this: CALL 'public final fun getY-impl (arg0: androidx.compose.ui.geometry.Offset): kotlin.Float declared in androidx.compose.ui.geometry.Offset' type=kotlin.Float origin=GET_PROPERTY
+              arg0: CALL 'public open fun getCenter-F1C5BW0 (): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.geometry.Offset origin=GET_PROPERTY
+                $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+            other: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp5_style type:androidx.compose.ui.graphics.drawscope.Stroke [val]
+        CONSTRUCTOR_CALL 'public constructor <init> (width: kotlin.Float, miter: kotlin.Float, cap: androidx.compose.ui.graphics.StrokeCap, join: androidx.compose.ui.graphics.StrokeJoin, pathEffect: androidx.compose.ui.graphics.PathEffect?, $mask0: kotlin.Int, $marker: kotlin.jvm.internal.DefaultConstructorMarker?) declared in androidx.compose.ui.graphics.drawscope.Stroke' type=androidx.compose.ui.graphics.drawscope.Stroke origin=DEFAULT_DISPATCH_CALL
+          width: CONST Float type=kotlin.Float value=3.0
+          miter: COMPOSITE type=kotlin.Float origin=DEFAULT_VALUE
+            CONST Float type=kotlin.Float value=0.0
+          cap: COMPOSITE type=androidx.compose.ui.graphics.StrokeCap origin=DEFAULT_VALUE
+            CALL 'public final fun <unsafe-coerce> <T, R> (v: T of kotlin.jvm.internal.<unsafe-coerce>): R of kotlin.jvm.internal.<unsafe-coerce> declared in kotlin.jvm.internal' type=androidx.compose.ui.graphics.StrokeCap origin=null
+              <T>: kotlin.Int
+              <R>: androidx.compose.ui.graphics.StrokeCap
+              v: CONST Int type=kotlin.Int value=0
+          join: COMPOSITE type=androidx.compose.ui.graphics.StrokeJoin origin=DEFAULT_VALUE
+            CALL 'public final fun <unsafe-coerce> <T, R> (v: T of kotlin.jvm.internal.<unsafe-coerce>): R of kotlin.jvm.internal.<unsafe-coerce> declared in kotlin.jvm.internal' type=androidx.compose.ui.graphics.StrokeJoin origin=null
+              <T>: kotlin.Int
+              <R>: androidx.compose.ui.graphics.StrokeJoin
+              v: CONST Int type=kotlin.Int value=0
+          pathEffect: COMPOSITE type=androidx.compose.ui.graphics.PathEffect? origin=DEFAULT_VALUE
+            CONST Null type=androidx.compose.ui.graphics.PathEffect? value=null
+          $mask0: CONST Int type=kotlin.Int value=30
+          $marker: CONST Null type=kotlin.jvm.internal.DefaultConstructorMarker? value=null
+      CALL 'public final fun drawArc-yD3GUKo$default ($this: androidx.compose.ui.graphics.drawscope.DrawScope, color: androidx.compose.ui.graphics.Color, startAngle: kotlin.Float, sweepAngle: kotlin.Float, useCenter: kotlin.Boolean, topLeft: androidx.compose.ui.geometry.Offset, size: androidx.compose.ui.geometry.Size, alpha: kotlin.Float, style: androidx.compose.ui.graphics.drawscope.DrawStyle?, colorFilter: androidx.compose.ui.graphics.ColorFilter?, blendMode: androidx.compose.ui.graphics.BlendMode, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Unit declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=kotlin.Unit origin=DEFAULT_DISPATCH_CALL
+        $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+        color: GET_VAR 'val tmp2_color: androidx.compose.ui.graphics.Color [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.Color origin=null
+        startAngle: GET_VAR 'val startAngle: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+        sweepAngle: CONST Float type=kotlin.Float value=1.0
+        useCenter: CONST Boolean type=kotlin.Boolean value=true
+        topLeft: GET_VAR 'val tmp4_topLeft: androidx.compose.ui.geometry.Offset [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.geometry.Offset origin=null
+        size: GET_VAR 'val tmp3_size: androidx.compose.ui.geometry.Size [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.geometry.Size origin=null
+        alpha: COMPOSITE type=kotlin.Float origin=DEFAULT_VALUE
+          CONST Float type=kotlin.Float value=0.0
+        style: GET_VAR 'val tmp5_style: androidx.compose.ui.graphics.drawscope.Stroke [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.Stroke origin=null
+        colorFilter: COMPOSITE type=androidx.compose.ui.graphics.ColorFilter? origin=DEFAULT_VALUE
+          CONST Null type=androidx.compose.ui.graphics.ColorFilter? value=null
+        blendMode: COMPOSITE type=androidx.compose.ui.graphics.BlendMode origin=DEFAULT_VALUE
+          CALL 'public final fun <unsafe-coerce> <T, R> (v: T of kotlin.jvm.internal.<unsafe-coerce>): R of kotlin.jvm.internal.<unsafe-coerce> declared in kotlin.jvm.internal' type=androidx.compose.ui.graphics.BlendMode origin=null
+            <T>: kotlin.Int
+            <R>: androidx.compose.ui.graphics.BlendMode
+            v: CONST Int type=kotlin.Int value=0
+        $mask0: CONST Int type=kotlin.Int value=832
+        $handler: CONST Null type=kotlin.Any? value=null
+    VAR name:angleRad type:kotlin.Float [val]
+      CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Double' type=kotlin.Float origin=null
+        $this: CALL 'public open fun toRadians (p0: kotlin.Double): kotlin.Double declared in java.lang.Math' type=kotlin.Double origin=null
+          p0: CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Float' type=kotlin.Double origin=null
+            $this: CALL 'public final fun plus (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=PLUS
+              $this: GET_VAR 'val startAngle: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+              other: CALL 'public final fun div (other: kotlin.Int): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=DIV
+                $this: GET_VAR '$sliceAngle: kotlin.Float declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+                other: CONST Int type=kotlin.Int value=2
+    VAR name:textX type:kotlin.Float [val]
+      CALL 'public final fun plus (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=PLUS
+        $this: CALL 'public final fun getX-impl (arg0: androidx.compose.ui.geometry.Offset): kotlin.Float declared in androidx.compose.ui.geometry.Offset' type=kotlin.Float origin=GET_PROPERTY
+          arg0: CALL 'public open fun getCenter-F1C5BW0 (): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.geometry.Offset origin=GET_PROPERTY
+            $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+        other: CALL 'public final fun times (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+          $this: CALL 'public final fun times (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+            $this: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+            other: CONST Float type=kotlin.Float value=0.7
+          other: CALL 'public final fun cos (x: kotlin.Float): kotlin.Float [inline] declared in kotlin.math.MathKt' type=kotlin.Float origin=null
+            x: GET_VAR 'val angleRad: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+    VAR name:textY type:kotlin.Float [val]
+      CALL 'public final fun plus (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=PLUS
+        $this: CALL 'public final fun getY-impl (arg0: androidx.compose.ui.geometry.Offset): kotlin.Float declared in androidx.compose.ui.geometry.Offset' type=kotlin.Float origin=GET_PROPERTY
+          arg0: CALL 'public open fun getCenter-F1C5BW0 (): androidx.compose.ui.geometry.Offset declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.geometry.Offset origin=GET_PROPERTY
+            $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+        other: CALL 'public final fun times (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+          $this: CALL 'public final fun times (other: kotlin.Float): kotlin.Float [operator] declared in kotlin.Float' type=kotlin.Float origin=MUL
+            $this: GET_VAR 'var radius: kotlin.Float [var] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+            other: CONST Float type=kotlin.Float value=0.7
+          other: CALL 'public final fun sin (x: kotlin.Float): kotlin.Float [inline] declared in kotlin.math.MathKt' type=kotlin.Float origin=null
+            x: GET_VAR 'val angleRad: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+    CALL 'public open fun drawText (p0: @[EnhancedNullability] kotlin.String, p1: kotlin.Float, p2: kotlin.Float, p3: @[EnhancedNullability] android.graphics.Paint): kotlin.Unit declared in android.graphics.Canvas' type=kotlin.Unit origin=null
+      $this: CALL 'public final fun <get-nativeCanvas> (): android.graphics.Canvas declared in androidx.compose.ui.graphics.AndroidCanvas_androidKt' type=android.graphics.Canvas origin=GET_PROPERTY
+        $receiver: CALL 'public open fun <get-canvas> (): androidx.compose.ui.graphics.Canvas declared in androidx.compose.ui.graphics.drawscope.DrawContext' type=androidx.compose.ui.graphics.Canvas origin=GET_PROPERTY
+          $this: CALL 'public abstract fun <get-drawContext> (): androidx.compose.ui.graphics.drawscope.DrawContext declared in androidx.compose.ui.graphics.drawscope.DrawScope' type=androidx.compose.ui.graphics.drawscope.DrawContext origin=GET_PROPERTY
+            $this: GET_VAR '$this$rotate: androidx.compose.ui.graphics.drawscope.DrawScope declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=androidx.compose.ui.graphics.drawscope.DrawScope origin=null
+      p0: GET_VAR '$option: kotlin.String declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.String origin=null
+      p1: GET_VAR 'val textX: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+      p2: GET_VAR 'val textY: kotlin.Float [val] declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8' type=kotlin.Float origin=null
+      p3: CALL 'public final fun apply <T> (block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.StandardKt.apply, kotlin.Unit>): T of kotlin.StandardKt.apply [inline] declared in kotlin.StandardKt' type=android.graphics.Paint origin=null
+        <T>: android.graphics.Paint
+        $receiver: CONSTRUCTOR_CALL 'public constructor <init> () declared in android.graphics.Paint' type=android.graphics.Paint origin=null
+        block: BLOCK type=@[ExtensionFunctionType] kotlin.Function1<android.graphics.Paint, kotlin.Unit> origin=LAMBDA
+          COMPOSITE type=kotlin.Unit origin=null
+          FUNCTION_REFERENCE 'private final fun RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8$lambda$7 (): kotlin.Unit declared in sick.sick.fiftyfifty2.RouletteKt' type=@[ExtensionFunctionType] kotlin.Function1<android.graphics.Paint, kotlin.Unit> origin=INLINE_LAMBDA reflectionTarget=null
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:50)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrSourceCompilerForInline.generateLambdaBody(IrSourceCompilerForInline.kt:67)
+	at org.jetbrains.kotlin.codegen.inline.ExpressionLambda.generateLambdaBody(LambdaInfo.kt:72)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrInlineCodegen.genValueAndPut(IrInlineCodegen.kt:99)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall$handleParameter(ExpressionCodegen.kt:610)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:638)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrCall.accept(IrCall.kt:24)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:573)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:578)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrBlockBody.accept(IrBlockBody.kt:20)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.generate(ExpressionCodegen.kt:239)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.doGenerate(FunctionCodegen.kt:121)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:46)
+	... 68 more
+Caused by: java.lang.RuntimeException: Exception while generating code for:
+FUN INLINE_LAMBDA name:RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8$lambda$7 visibility:private modality:FINAL <> ($receiver:android.graphics.Paint) returnType:kotlin.Unit
+  $receiver: VALUE_PARAMETER name:$this$apply type:android.graphics.Paint
+  BLOCK_BODY
+    VAR name:$i$a$-apply-RouletteKt$RouletteScreen$1$1$1$1$1$1 type:kotlin.Int [val]
+      CONST Int type=kotlin.Int value=0
+    CALL 'public open fun setTextAlign (p0: @[FlexibleNullability] android.graphics.Paint.Align?): kotlin.Unit declared in android.graphics.Paint' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.graphics.Paint declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8$lambda$7' type=android.graphics.Paint origin=null
+      p0: GET_FIELD 'FIELD FIELD_FOR_ENUM_ENTRY name:CENTER type:android.graphics.Paint.Align visibility:public [final,static]' type=android.graphics.Paint.Align origin=null
+    CALL 'public open fun setTypeface (p0: @[FlexibleNullability] android.graphics.Typeface?): @[FlexibleNullability] android.graphics.Typeface? declared in android.graphics.Paint' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.graphics.Paint declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8$lambda$7' type=android.graphics.Paint origin=null
+      p0: GET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:DEFAULT_BOLD type:@[FlexibleNullability] android.graphics.Typeface? visibility:public [final,static]' type=@[FlexibleNullability] android.graphics.Typeface? origin=null
+    CALL 'public open fun setStyle (p0: @[FlexibleNullability] android.graphics.Paint.Style?): kotlin.Unit declared in android.graphics.Paint' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.graphics.Paint declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8$lambda$7' type=android.graphics.Paint origin=null
+      p0: GET_FIELD 'FIELD FIELD_FOR_ENUM_ENTRY name:FILL type:android.graphics.Paint.Style visibility:public [final,static]' type=android.graphics.Paint.Style origin=null
+    CALL 'public open fun setStrokeWidth (p0: kotlin.Float): kotlin.Unit declared in android.graphics.Paint' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.graphics.Paint declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8$lambda$7' type=android.graphics.Paint origin=null
+      p0: CONST Float type=kotlin.Float value=2.0
+    SET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:strokeColor type:kotlin.Int visibility:public [final,static]' type=kotlin.Unit origin=EQ
+      value: CONST Int type=kotlin.Int value=-16777216
+    CALL 'public open fun setTextSize (p0: kotlin.Float): kotlin.Unit declared in android.graphics.Paint' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.graphics.Paint declared in sick.sick.fiftyfifty2.RouletteKt.RouletteScreen$lambda$13$lambda$11$lambda$10$lambda$9$lambda$8$lambda$7' type=android.graphics.Paint origin=null
+      p0: CONST Float type=kotlin.Float value=40.0
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:50)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrSourceCompilerForInline.generateLambdaBody(IrSourceCompilerForInline.kt:67)
+	at org.jetbrains.kotlin.codegen.inline.ExpressionLambda.generateLambdaBody(LambdaInfo.kt:72)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrInlineCodegen.genValueAndPut(IrInlineCodegen.kt:99)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall$handleParameter(ExpressionCodegen.kt:610)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:638)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrCall.accept(IrCall.kt:24)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.gen(ExpressionCodegen.kt:216)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrCallGenerator.genValueAndPut(IrCallGenerator.kt:48)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall$handleParameter(ExpressionCodegen.kt:610)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:638)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrCall.accept(IrCall.kt:24)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:573)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:578)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrBlockBody.accept(IrBlockBody.kt:20)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.generate(ExpressionCodegen.kt:239)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.doGenerate(FunctionCodegen.kt:121)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:46)
+	... 82 more
+Caused by: java.lang.AssertionError: access of const val: SET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:strokeColor type:kotlin.Int visibility:public [final,static]' type=kotlin.Unit origin=EQ
+  value: CONST Int type=kotlin.Int value=-16777216
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitFieldAccess(ExpressionCodegen.kt:855)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitFieldAccess(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitSetField(IrElementVisitor.kt:206)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitSetField(ExpressionCodegen.kt:902)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitSetField(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrSetField.accept(IrSetField.kt:21)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:573)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:578)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:137)
+	at org.jetbrains.kotlin.ir.expressions.IrBlockBody.accept(IrBlockBody.kt:20)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.generate(ExpressionCodegen.kt:239)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.doGenerate(FunctionCodegen.kt:121)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:46)
+	... 102 more
+
+

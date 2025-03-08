@@ -1,5 +1,6 @@
 package sick.sick.fiftyfifty2
 
+
 import android.content.Intent
 import android.os.Bundle
 
@@ -159,7 +160,7 @@ fun FiftyFiftyApp(startDestination: String) { // fixat startdestination//@#LOL x
         ) {
             composable("FiftyFifty") { FiftyFiftyView(navController) }
             composable("MoreChoices") { MoreChoices() } // nya sida för val av alternativ i motor?
-            composable("Roulette") { RouletteScreen() } // roulette är en ny sida
+            composable("Roulette") { Roulette() } // roulette är en ny sida
             composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
         }
     }
@@ -217,7 +218,7 @@ fun MoreChoices() {
 @Composable
 fun Roulette() {
     Text(text = "Roulette")
-    RouletteScreen()
+    RouletteScreen() // visa roulette i motor
 }
 
 @Composable
