@@ -2,12 +2,16 @@ package sick.sick.fiftyfifty2
 
 
 import android.content.Intent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -50,55 +54,73 @@ fun moreChoicesView() {
             modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan todo fel ? padding
             // ska jag ha detta row?
         )
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan
-            ) {
-                Button(onClick = {
-                    if (inText.value.isNotBlank()) { // om det är infyllt så skickas det vidare till valdText
-                        choices.add(inText.value) // Lägger till inText i choices
-                        //  choices = choices + inputText??====
-                        inText.value = "" // tömmer inText efter varje klick
-                        // inputText = "" // Nollställ fältet efter tillägg
-                    }
-                } ) {
-                    Text("Lägg till") // knapptext för att lägga till fler alternativ
-                } // slut på row
-                Button(onClick = { choices.clear() }) { // tömmer lista
-                    Text("Rensa") // knapptext för att ta bort alla alternativ???!!! todo
-                }
-
-
-            }
-//        Column( // fix
-//            modifier = Modifier.weight(1f),
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-            // lista med valda alternativ
-            choices.forEach { choice -> // loopa genom valda alternativ och visa dem
-                Text(choice, fontSize = 50.sp, color = Red) // todo ???
-            }
-//        }
-        //knapp slumpa och visa valda alternativ
-        Button(
-            onClick = {
-                if (choices.isNotEmpty()) {
-                    valdText.value = choices.random() // slumpmässigt valda alternativ
-                    val selectedChoice = valdText.value // sparar valdText i selectedChoice
-                    //starta aktivitet
-                    val intent = Intent(context, Motor::class.java).apply {
-                        putExtra("EXTRA_MESSAGE", selectedChoice) // skickar valda option till motor
-                        putExtra("SOURCE", "MoreChoices") // SKA MED TILL MOTOR FÖR SKICKA RÄTT TIBLAKA!!!!!!!!!!!!
-                    }
-                    context.startActivity(intent) // starta motor med valda option som extra
-
-                }
-            },
-            modifier = Modifier.padding(top = 16.dp) // todo ====????styledpadding
-
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan
         ) {
-            // go
-            Text("Slumpa :D")
+            Button(onClick = {
+                if (inText.value.isNotBlank()) { // om det är infyllt så skickas det vidare till valdText
+                    choices.add(inText.value) // Lägger till inText i choices
+                    //  choices = choices + inputText??====
+                    inText.value = "" // tömmer inText efter varje klick
+                    // inputText = "" // Nollställ fältet efter tillägg
+                }
+            }) {
+                Text("Lägg till") // knapptext för att lägga till fler alternativ
+            } // slut på row
+            Button(onClick = { choices.clear() }) { // tömmer lista
+                Text("Rensa") // knapptext för att ta bort alla alternativ???!!! todo
+            }
+        }
+
+
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.padding(10.dp).fillMaxWidth()
+                .padding(end = 5.dp)
+        ) {
+            choices.forEach { choice -> // loopa genom valda alternativ och visa dem
+                Box(
+                    modifier =
+                    Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
+
+                ) {
+                    Text(
+                        choice, fontSize = 50.sp, color = Red, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
+
+                    ) // todo ?
+                }
+            }
+
+        }
+//        }
+            //knapp slumpa och visa valda alternativ
+            Button(
+                onClick = {
+                    if (choices.isNotEmpty()) {
+                        valdText.value = choices.random() // slumpmässigt valda alternativ
+                        val selectedChoice = valdText.value // sparar valdText i selectedChoice
+                        //starta aktivitet
+                        val intent = Intent(context, Motor::class.java).apply {
+                            putExtra(
+                                "EXTRA_MESSAGE",
+                                selectedChoice
+                            ) // skickar valda option till motor
+                            putExtra(
+                                "SOURCE",
+                                "MoreChoices"
+                            ) // SKA MED TILL MOTOR FÖR SKICKA RÄTT TIBLAKA!!!!!!!!!!!!
+                        }
+                        context.startActivity(intent) // starta motor med valda option som extra
+
+                    }
+                },
+                modifier = Modifier.padding(top = 16.dp) // todo ====????styledpadding
+
+            ) {
+                // go
+                Text("Slumpa :D")
+            }
         }
     }
-}

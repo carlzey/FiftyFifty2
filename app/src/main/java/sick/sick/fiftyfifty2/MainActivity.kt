@@ -176,27 +176,27 @@ fun FiftyFiftyApp(startDestination: String) { // fixat startdestination//@#LOL x
 fun BottomNavigationBar(navController: NavController) {
     NavigationBar { // navigering 1-3
         NavigationBarItem( // item 1
-            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "FiftyFifty") }, // ikon
+            icon = { Icon(painterResource(id = android.R.drawable.arrow_up_float), contentDescription = "FiftyFifty") }, // ikon
             label = { Text("FiftyFifty") }, // namn på sida
             selected = navController.currentDestination?.route == "FiftyFifty", // kolla om sidan är valda
             onClick = { navController.navigate("FiftyFifty") } // navigerar till FiftyFifty
         )
         // lägg till fler navigeringar här om det behövs
         NavigationBarItem(
-            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "MoreChoices") },
+            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "MoreChoices") },
             label = { Text("MoreChoices") },
             selected = navController.currentDestination?.route == "MoreChoices",
             onClick = { navController.navigate("MoreChoices") }
         )
         // lägg till fler navigeringar här om det behövs
         NavigationBarItem(
-            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "Roulette") },
+            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Roulette") },
             label = { Text("Roulette") },
             selected = navController.currentDestination?.route == "Roulette",
             onClick = { navController.navigate("Roulette") }
         )
         NavigationBarItem(
-            icon = { Icon(painterResource(id = R.drawable.ic_launcher_background), contentDescription = "Inställningar") },
+            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Inställningar") },
             label = { Text("Inställningar") },
             selected = navController.currentDestination?.route == "Inställningar",
             onClick = { navController.navigate("Inställningar") }
