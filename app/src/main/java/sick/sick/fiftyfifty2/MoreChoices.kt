@@ -1,6 +1,7 @@
 package sick.sick.fiftyfifty2
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
+import sick.sick.fiftyfifty2.history.HistoryViewModel
 
 
 /**
@@ -32,8 +34,9 @@ import androidx.lifecycle.ViewModel
  *  mer info om vad som händer här
  *  lol lol lol
  */
+@SuppressLint("NewApi")
 @Composable
-fun moreChoicesView() {
+fun moreChoicesView(viewModel: HistoryViewModel) {
 
     var choices = remember { mutableStateListOf<String>() } // lagrar valda alternativ i en lista
     var inText = remember { mutableStateOf("") } // används för att lagra inmatade text
@@ -101,6 +104,10 @@ fun moreChoicesView() {
                     if (choices.isNotEmpty()) {
                         valdText.value = choices.random() // slumpmässigt valda alternativ
                         val selectedChoice = valdText.value // sparar valdText i selectedChoice
+
+                        val currentDate = java.time.LocalDateTime.now().toString() // hämta nuvarande datum
+                        viewModel.insertHistory("MoreChoices", choices.toString(), selectedChoice, currentDate) // spara resultat i databas
+
                         //starta aktivitet
                         val intent = Intent(context, Motor::class.java).apply {
                             putExtra(

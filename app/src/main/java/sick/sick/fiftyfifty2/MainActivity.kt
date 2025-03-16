@@ -1,12 +1,13 @@
 package sick.sick.fiftyfifty2
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-
+import androidx.activity.viewModels
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -29,10 +30,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.SemanticsProperties.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController // ny
+import sick.sick.fiftyfifty2.history.HistoryDatabase
+import sick.sick.fiftyfifty2.history.HistoryViewModel
+import sick.sick.fiftyfifty2.history.HistoryViewModelFactory
+import sick.sick.fiftyfifty2.history.Repository
+import kotlin.getValue
 
 import kotlin.random.Random
 
@@ -46,8 +54,16 @@ class MainActivity : ComponentActivity() {
          * vi använder compose istället för xml
          */
         val navigateTo = intent.getStringExtra("NAVIGATE_TO") ?: "FiftyFifty"
+        // 1️⃣ Skapa en instans av Room-databasen
+        val database = HistoryDatabase.getDatabase(applicationContext)
+        //     // 2️⃣ Skapa Repository som använder DAO från Room
+        val repository = Repository(database.historyDao())
+        // // 3️⃣ Skapa ViewModelFactory för att hantera ViewModel-instansiering
+        val viewModelFactory = HistoryViewModelFactory(repository)
+        //  // 4️⃣ Skapa ViewModel med Factory
+        val historyViewModel: HistoryViewModel by viewModels { viewModelFactory }
         setContent {
-            FiftyFiftyApp(startDestination = navigateTo) // fixat startdestination
+            FiftyFiftyApp(startDestination = navigateTo, historyViewModel) // fixat startdestination
         }
     }
 }
@@ -58,8 +74,9 @@ class MainActivity : ComponentActivity() {
  *  mer ? för composable funktion och navcontroller
  *  Kaffe?!
  */
+@SuppressLint("NewApi")
 @Composable // Annotering för att den är en composable funktion
-fun FiftyFiftyView(navController: NavController) {
+fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = viewModel()) {
     // håller användarens inmatade texter
     var firstOption by remember { mutableStateOf("") } // State för första val
     var secondOption by remember { mutableStateOf("") } // State för andra val
@@ -112,6 +129,13 @@ fun FiftyFiftyView(navController: NavController) {
                     // Det slumpmässiga valet som visas efter knapptryck
                     selectedOption = if (random1 > random2) firstOption else secondOption
                     //todo ändra till motor
+
+                    // !!!Spara resultat i databas
+                    val options = "$firstOption vs $secondOption" // valda alternativ som en sträng
+                    val currentdate = java.time.LocalDateTime.now().toString() // hämta nuvarande datum
+                    viewModel.insertHistory("FiftyFifty", options, selectedOption, currentdate) // spara resultat i databas
+
+
                     //starta motor med valda option
                     val intent = Intent(context, Motor::class.java).apply {
                         putExtra("EXTRA_MESSAGE", selectedOption) // skickar valda option till motor
@@ -146,7 +170,7 @@ fun FiftyFiftyView(navController: NavController) {
  *   @param navController - Navcontroller för att hantera navigering och state
  */
 @Composable
-fun FiftyFiftyApp(startDestination: String) { // fixat startdestination//@#LOL xD  tog bort navcontroller
+fun FiftyFiftyApp(startDestination: String, historyViewModel: HistoryViewModel) { // fixat ävenn viewmodel nu
     val navController = rememberNavController() // navigering  todo kolla om det fungerar
     Scaffold(
         bottomBar = {
@@ -158,10 +182,10 @@ fun FiftyFiftyApp(startDestination: String) { // fixat startdestination//@#LOL x
             startDestination = startDestination, // start sida är FiftyFifty
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("FiftyFifty") { FiftyFiftyView(navController) }
-            composable("MoreChoices") { MoreChoices() } // nya sida för val av alternativ i motor?
+            composable("FiftyFifty") { FiftyFiftyView(navController, historyViewModel) }
+            composable("MoreChoices") { MoreChoices(viewModel = historyViewModel) } // nya sida för val av alternativ i motor?
             composable("Roulette") { Roulette() } // roulette är en ny sida
-            composable("History") { HistoryScreen() } // historik är en ny sida
+            composable("History") { HistoryScreen(viewModel = historyViewModel) } //FIXAT! historik är en ny sida
             composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
         }
     }
@@ -211,9 +235,9 @@ fun BottomNavigationBar(navController: NavController) {
     }
 }
 @Composable
-fun MoreChoices() {
+fun MoreChoices(viewModel: HistoryViewModel) {
     Text(text = "MoreanChoices")
-    moreChoicesView() // visa nya alternativ i motor
+    moreChoicesView(viewModel) // visa nya alternativ i motor
     /**
      * morechoices är en ny sida som visar alternativ som användaren kan välja fler gånger
      * med mer och mer alternativ som visas i en lista eller en grid.
@@ -229,9 +253,9 @@ fun Roulette() {
 }
 
 @Composable
-fun HistoryScreen() {
+fun HistoryScreen(viewModel: HistoryViewModel) {
     // todo skriv historik
-    History() // historik är en ny sida som visar resultat från körningar i en lista eller en grid.
+    History(viewModel) // historik är en ny sida som visar resultat från körningar i en lista eller en grid.
 }
 
 @Composable
