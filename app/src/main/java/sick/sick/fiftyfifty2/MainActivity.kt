@@ -161,6 +161,7 @@ fun FiftyFiftyApp(startDestination: String) { // fixat startdestination//@#LOL x
             composable("FiftyFifty") { FiftyFiftyView(navController) }
             composable("MoreChoices") { MoreChoices() } // nya sida för val av alternativ i motor?
             composable("Roulette") { Roulette() } // roulette är en ny sida
+            composable("History") { HistoryScreen() } // historik är en ny sida
             composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
         }
     }
@@ -196,6 +197,12 @@ fun BottomNavigationBar(navController: NavController) {
             onClick = { navController.navigate("Roulette") }
         )
         NavigationBarItem(
+            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "History") },
+            label = { Text("History") },
+            selected = navController.currentDestination?.route == "History",
+            onClick = { navController.navigate("History") }
+        )
+        NavigationBarItem(
             icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Inställningar") },
             label = { Text("Inställningar") },
             selected = navController.currentDestination?.route == "Inställningar",
@@ -219,6 +226,12 @@ fun MoreChoices() {
 fun Roulette() {
     Text(text = "Roulette")
     RouletteScreen() // visa roulette i motor
+}
+
+@Composable
+fun HistoryScreen() {
+    // todo skriv historik
+    History() // historik är en ny sida som visar resultat från körningar i en lista eller en grid.
 }
 
 @Composable
