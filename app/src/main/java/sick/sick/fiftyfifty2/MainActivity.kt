@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
         /**
          * setcontent ersätter setcontentview(r.layout.mainactivity)
          * xml
-         *
+         * todo större textruta så man ser texten vid längre
          * vi använder compose istället för xml
          */
         val navigateTo = intent.getStringExtra("NAVIGATE_TO") ?: "FiftyFifty"
@@ -261,4 +261,5 @@ fun HistoryScreen(viewModel: HistoryViewModel) {
 @Composable
 fun SettingsScreen() {
     Text(text = "Roulette")
+    SocialWindow()
 }

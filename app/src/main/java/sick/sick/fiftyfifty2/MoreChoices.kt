@@ -33,6 +33,9 @@ import sick.sick.fiftyfifty2.history.HistoryViewModel
  *  ViewModel för att lagra valda alternativ
  *  mer info om vad som händer här
  *  lol lol lol
+ *
+ *  Todo så alternativen blir mindre samt längre blir .....
+ *  Todo även så rutorna blir färgade boxes alternativen
  */
 @SuppressLint("NewApi")
 @Composable
@@ -109,7 +112,7 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                         viewModel.insertHistory("MoreChoices", choices.toString(), selectedChoice, currentDate) // spara resultat i databas
 
                         //starta aktivitet
-                        val intent = Intent(context, Motor::class.java).apply {
+                        val intent = Intent(context, Motor::class.java).apply { 
                             putExtra(
                                 "EXTRA_MESSAGE",
                                 selectedChoice
