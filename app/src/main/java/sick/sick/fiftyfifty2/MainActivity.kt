@@ -1,9 +1,10 @@
 package sick.sick.fiftyfifty2
 
-
+import TestImeActionNext
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+
 
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +13,9 @@ import androidx.activity.viewModels
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -24,7 +27,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.SemanticsProperties.ImeAction
@@ -89,10 +94,16 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
     //todo testa här om det fungerar
     val context = LocalContext.current // lol
 
+    // Behövs detta? todo kolla om det fungerar
+    val secondFocusRequester = remember { FocusRequester() } // gör så att tangentbordet försvinnerzz
+    val keyboardController = LocalSoftwareKeyboardController.current // gör så att tangentbordet försvinnerzz
+
     Column (
-        modifier = Modifier.fillMaxSize().padding(16.dp), // Lägger till padding runt kolumnen
+        modifier = Modifier.fillMaxSize().padding(16.dp).imePadding().padding(bottom = 100.dp), // Lägger till padding samt gör så att tangentbordet försvinnerzz
         horizontalAlignment = Alignment.CenterHorizontally, // Centrerar horizontalt
-        verticalArrangement = Arrangement.Center // Centrerar vertikalt
+        //verticalArrangement = Arrangement.Center // Centrerar vertikalt
+         verticalArrangement = Arrangement.Center,
+
     ) {
         Text(text = stringResource(id = R.string.title_FiftyFifty), // Hämtar text från strings.xml
             fontSize = 50.sp, // storlek text
@@ -109,14 +120,14 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
             value = firstOption, // första valet
             onValueChange = { firstOption = it }, // uppdaterar första valet
             label = { Text(stringResource(id = R.string.first_Hint)) }, // hint
-            //keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next), // tangentbord
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Next), // tangentbord
             modifier = Modifier.padding(top = 16.dp) // Lägger till padding ovan
         )
         TextField(
             value = secondOption, // second valet
             onValueChange = { secondOption = it }, // uppdaterar första valet
             label = { Text(stringResource(id = R.string.second_Hint)) }, // hint
-            //keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done), // tangentbord
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Done), // tangentbord
             modifier = Modifier.padding(top = 16.dp) // Lägger till padding ovan
         )
         Button(
@@ -159,6 +170,7 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
                 modifier = Modifier.padding(top = 16.dp))
 
     }
+
 
 
 }
@@ -214,24 +226,27 @@ fun BottomNavigationBar(navController: NavController) {
             onClick = { navController.navigate("MoreChoices") }
         )
         // lägg till fler navigeringar här om det behövs
+        /**
         NavigationBarItem(
             icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Roulette") },
             label = { Text("Roulette") },
             selected = navController.currentDestination?.route == "Roulette",
             onClick = { navController.navigate("Roulette") }
-        )
+        ) */
         NavigationBarItem(
             icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "History") },
             label = { Text("History") },
             selected = navController.currentDestination?.route == "History",
             onClick = { navController.navigate("History") }
         )
+        /**
         NavigationBarItem(
             icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Inställningar") },
             label = { Text("Inställningar") },
             selected = navController.currentDestination?.route == "Inställningar",
             onClick = { navController.navigate("Inställningar") }
         )
+        */
     }
 }
 @Composable
@@ -261,5 +276,7 @@ fun HistoryScreen(viewModel: HistoryViewModel) {
 @Composable
 fun SettingsScreen() {
     Text(text = "Roulette")
-    SocialWindow()
+    //SocialWindow() -  För socialfunktionen ...
+    //TestImeActionNext() // för imeaction
 }
+

@@ -47,11 +47,11 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
     val context = LocalContext.current // Nytt::::::::::För att starta ny aktivitet
 
     Column (
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp).padding(bottom = 100.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Välj fler alternativ", fontSize = 24.sp)
+        Text("More Choices", fontSize = 50.sp)
 
         TextField(
             value = inText.value,
@@ -78,29 +78,6 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                 Text("Rensa") // knapptext för att ta bort alla alternativ???!!! todo
             }
         }
-
-
-
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.padding(10.dp).fillMaxWidth()
-                .padding(end = 5.dp)
-        ) {
-            choices.forEach { choice -> // loopa genom valda alternativ och visa dem
-                Box(
-                    modifier =
-                    Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
-
-                ) {
-                    Text(
-                        choice, fontSize = 50.sp, color = Red, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
-
-                    ) // todo ?
-                }
-            }
-
-        }
-//        }
             //knapp slumpa och visa valda alternativ
             Button(
                 onClick = {
@@ -126,11 +103,36 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
 
                     }
                 },
-                modifier = Modifier.padding(top = 16.dp) // todo ====????styledpadding
+                modifier = Modifier.padding(top = 2.dp) // todo ====????styledpadding
 
             ) {
                 // go
                 Text("Slumpa :D")
             }
+
+        /**
+         * Flyttat så att alternativen ligger under för underlätta
+         *
+         */
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.padding(2.dp).fillMaxWidth()
+                .padding(end = 5.dp)
+        ) {
+            choices.forEach { choice -> // loopa genom valda alternativ och visa dem
+                Box(
+                    modifier =
+                    Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
+
+                ) {
+                    Text(
+                        choice, fontSize = 50.sp, color = Red, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
+
+                    ) // todo ?
+                }
+            }
+
+        }
         }
     }
+
