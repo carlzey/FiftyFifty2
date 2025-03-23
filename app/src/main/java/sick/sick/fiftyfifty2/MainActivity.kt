@@ -18,6 +18,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Balance
+import androidx.compose.material.icons.filled.Casino
+import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -143,7 +149,8 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
 
                     // !!!Spara resultat i databas
                     val options = "$firstOption vs $secondOption" // valda alternativ som en sträng
-                    val currentdate = java.time.LocalDateTime.now().toString() // hämta nuvarande datum
+                    val formatter = java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm") // formatterar tiden
+                    val currentdate = java.time.LocalDateTime.now().format(formatter) // hämta nuvarande datum
                     viewModel.insertHistory("FiftyFifty", options, selectedOption, currentdate) // spara resultat i databas
 
 
@@ -213,14 +220,14 @@ fun FiftyFiftyApp(startDestination: String, historyViewModel: HistoryViewModel) 
 fun BottomNavigationBar(navController: NavController) {
     NavigationBar { // navigering 1-3
         NavigationBarItem( // item 1
-            icon = { Icon(painterResource(id = android.R.drawable.arrow_up_float), contentDescription = "FiftyFifty") }, // ikon
+            icon = { Icon(Icons.Default.Balance, contentDescription = "FiftyFifty") }, // ikon
             label = { Text("FiftyFifty") }, // namn på sida
             selected = navController.currentDestination?.route == "FiftyFifty", // kolla om sidan är valda
             onClick = { navController.navigate("FiftyFifty") } // navigerar till FiftyFifty
         )
         // lägg till fler navigeringar här om det behövs
         NavigationBarItem(
-            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "MoreChoices") },
+            icon = { Icon(Icons.Default.Tune, contentDescription = "MoreChoices") },
             label = { Text("MoreChoices") },
             selected = navController.currentDestination?.route == "MoreChoices",
             onClick = { navController.navigate("MoreChoices") }
@@ -234,7 +241,7 @@ fun BottomNavigationBar(navController: NavController) {
             onClick = { navController.navigate("Roulette") }
         ) */
         NavigationBarItem(
-            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "History") },
+            icon = { Icon(Icons.Filled.History, contentDescription = "History") },
             label = { Text("History") },
             selected = navController.currentDestination?.route == "History",
             onClick = { navController.navigate("History") }

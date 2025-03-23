@@ -87,7 +87,7 @@ fun HistoryItemView(item: HistoryEntity) { //
             Text(text = item.game, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
             Text(text = "Alternativ: ${item.options}")
             Text(text = "Valt: ${item.chosenOption}", fontWeight = FontWeight.Bold)
-            Text(text = "Tidpunkt: ${item.date}", style = MaterialTheme.typography.displaySmall) // fix?
+            Text(text = "Tidpunkt: ${item.date}", style = MaterialTheme.typography.labelSmall) // fix?
         }
 
          }

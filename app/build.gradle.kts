@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.compose.material:material-icons-extended")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.30.1")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation ("androidx.room:room-runtime:2.6.1")
     annotationProcessor ("androidx.room:room-compiler:2.6.1")

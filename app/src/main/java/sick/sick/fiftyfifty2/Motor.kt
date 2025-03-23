@@ -37,7 +37,7 @@ fun MotorView(selectedOption: String, source: String) { // Tar emot valda option
 
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp).padding(bottom = 100.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

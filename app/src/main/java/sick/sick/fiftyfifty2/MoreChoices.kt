@@ -3,16 +3,21 @@ package sick.sick.fiftyfifty2
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.view.RoundedCorner
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -21,12 +26,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import sick.sick.fiftyfifty2.history.HistoryViewModel
+import com.google.accompanist.flowlayout.FlowRow
 
 
 /**
@@ -84,9 +91,11 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                     if (choices.isNotEmpty()) {
                         valdText.value = choices.random() // slumpmässigt valda alternativ
                         val selectedChoice = valdText.value // sparar valdText i selectedChoice
-
-                        val currentDate = java.time.LocalDateTime.now().toString() // hämta nuvarande datum
-                        viewModel.insertHistory("MoreChoices", choices.toString(), selectedChoice, currentDate) // spara resultat i databas
+                        val joined = choices.joinToString(", ") // konkatenerar alla valda alternativ med en kommatecken FIX!
+                        val formatter = java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm") // formatterar tiden
+                        val currentDate = java.time.LocalDateTime.now().format(formatter) // hämta nuvarande datum
+                        //val currentDate = java.time.LocalDateTime.now().toString() // hämta nuvarande datum
+                        viewModel.insertHistory("MoreChoices", joined, selectedChoice, currentDate) // spara resultat i databas
 
                         //starta aktivitet
                         val intent = Intent(context, Motor::class.java).apply { 
@@ -110,23 +119,32 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                 Text("Slumpa :D")
             }
 
+        // Testa Flowrow
+        FlowRow(
+            mainAxisSpacing = 8.dp,
+            crossAxisSpacing = 8.dp,
+            modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan
+            ,
+
+        ) //({  }
+
         /**
          * Flyttat så att alternativen ligger under för underlätta
          *
          */
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.padding(2.dp).fillMaxWidth()
-                .padding(end = 5.dp)
-        ) {
+//
+//
+            {
             choices.forEach { choice -> // loopa genom valda alternativ och visa dem
                 Box(
                     modifier =
-                    Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
-
+                    Modifier.background(MaterialTheme.colorScheme.primaryContainer).clip(RoundedCornerShape(12.dp))
+                        .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp))
+                        .padding(horizontal = 12.dp, vertical = 12.dp)
+                    // Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
                 ) {
                     Text(
-                        choice, fontSize = 50.sp, color = Red, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
+                        choice, fontSize = 30.sp, color = MaterialTheme.colorScheme.primary, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 10F))
 
                     ) // todo ?
                 }
