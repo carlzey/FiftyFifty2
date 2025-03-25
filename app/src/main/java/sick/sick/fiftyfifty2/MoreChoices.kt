@@ -63,7 +63,7 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
         TextField(
             value = inText.value,
             onValueChange = { inText.value = it }, // uppdaterar inText varje gång?
-            label = { Text("Lägg till fler alternativ") }, // hint
+            label = { Text("Add Choices") }, // hint
             modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan todo fel ? padding
             // ska jag ha detta row?
         )
@@ -79,10 +79,10 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                     // inputText = "" // Nollställ fältet efter tillägg
                 }
             }) {
-                Text("Lägg till") // knapptext för att lägga till fler alternativ
+                Text("Add") // knapptext för att lägga till fler alternativ
             } // slut på row
             Button(onClick = { choices.clear() }) { // tömmer lista
-                Text("Rensa") // knapptext för att ta bort alla alternativ???!!! todo
+                Text("Clear") // knapptext för att ta bort alla alternativ???!!! todo
             }
         }
             //knapp slumpa och visa valda alternativ
@@ -91,7 +91,7 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                     if (choices.isNotEmpty()) {
                         valdText.value = choices.random() // slumpmässigt valda alternativ
                         val selectedChoice = valdText.value // sparar valdText i selectedChoice
-                        val joined = choices.joinToString(", ") // konkatenerar alla valda alternativ med en kommatecken FIX!
+                        val joined = choices.joinToString(",    ") // Gjort Lite Bredare!
                         val formatter = java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm") // formatterar tiden
                         val currentDate = java.time.LocalDateTime.now().format(formatter) // hämta nuvarande datum
                         //val currentDate = java.time.LocalDateTime.now().toString() // hämta nuvarande datum
@@ -116,7 +116,7 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
 
             ) {
                 // go
-                Text("Slumpa :D")
+                Text("Randomize!")
             }
 
         // Testa Flowrow
@@ -144,7 +144,7 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                     // Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
                 ) {
                     Text(
-                        choice, fontSize = 30.sp, color = MaterialTheme.colorScheme.primary, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 10F))
+                        choice, fontSize = 20.sp, color = MaterialTheme.colorScheme.primary, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 10F))
 
                     ) // todo ?
                 }

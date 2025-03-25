@@ -171,10 +171,7 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
             Text(errorText, color = MaterialTheme.colorScheme.error, fontSize = 18.sp)
         }
         if (selectedOption.isNotBlank()) {
-            Text(
-                text = "Valt alternativ: $selectedOption",
-                fontSize = 24.sp,
-                modifier = Modifier.padding(top = 16.dp))
+           // Do nothing
 
     }
 

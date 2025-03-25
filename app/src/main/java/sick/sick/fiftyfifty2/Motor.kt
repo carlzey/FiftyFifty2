@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -41,14 +42,14 @@ fun MotorView(selectedOption: String, source: String) { // Tar emot valda option
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Valt alternativ:", // Visar valda option
-            fontSize = 50.sp,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
+//        Text(
+//            text = stringResource(id = R.string.selectedChoice), // Visar valda option
+//            fontSize = 50.sp,
+//            modifier = Modifier.padding(bottom = 8.dp)
+//        )
         Text(
             selectedOption,
-            fontSize = 32.sp,
+            fontSize = 50.sp, // ändrat från 32
             color = MaterialTheme.colorScheme.primary
         )
 
@@ -73,7 +74,7 @@ fun MotorView(selectedOption: String, source: String) { // Tar emot valda option
                 }
             }
         ) {
-            Text("Go back")
+            Text(stringResource(R.string.motor_back)) //
         }
 
 

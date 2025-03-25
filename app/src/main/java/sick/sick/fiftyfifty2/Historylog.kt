@@ -19,8 +19,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import sick.sick.fiftyfifty2.history.HistoryEntity
 import sick.sick.fiftyfifty2.history.HistoryViewModel
@@ -57,7 +61,7 @@ fun History(viewModel: HistoryViewModel = viewModel()) {
             FloatingActionButton(
                 onClick = { viewModel.clearHistory() }
             ) {
-                Text("Rensa")
+                Text("Clear")
             }}
 
     ) { padding -> // Lägg till padding values
@@ -85,9 +89,15 @@ fun HistoryItemView(item: HistoryEntity) { //
             modifier = Modifier.padding(16.dp)
         ) {
             Text(text = item.game, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-            Text(text = "Alternativ: ${item.options}")
-            Text(text = "Valt: ${item.chosenOption}", fontWeight = FontWeight.Bold)
-            Text(text = "Tidpunkt: ${item.date}", style = MaterialTheme.typography.labelSmall) // fix?
+            Text(text = item.options) // ta bort Choices: "${item.options}")
+            // snyggat till det här!
+            Text(buildAnnotatedString {
+                append("Fate chose ---> ")
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(item.chosenOption)
+                }
+            })
+            Text(text = "Date: ${item.date}", style = MaterialTheme.typography.labelSmall) // fix?
         }
 
          }
