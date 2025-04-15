@@ -1,6 +1,7 @@
 package sick.sick.fiftyfifty2
 
 
+import android.R.attr.textSize
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -28,8 +29,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.graphics.nativeCanvas
 import kotlin.math.roundToInt
 import kotlin.random.Random
+
+import android.graphics.Paint
+import android.graphics.Color as AndroidColor
 
 @Composable
 fun RouletteScreen() {
@@ -84,6 +89,8 @@ fun RouletteScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(4.dp)
+                        ///.weight(1f) Vet inte ännu todo
+                        .height(30.dp) // Ändra Todo
                         .background(Color.DarkGray, shape = RoundedCornerShape(8.dp))
                         .padding(8.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -163,6 +170,35 @@ fun RoulettWheel(options: List<String>, onResult: (String) -> Unit) {
                     sweepAngle = sweepAngle,
                     useCenter = true
                 )
+                // Rita text i varje sektion todo
+                val textAngle = startAngle + sweepAngle / 2f // vinkel för texten i varje sektion
+                val radius = (size.minDimension / 3.5f) // avstånd från center till texten
+                // roterar canvasen för att rita texten i rätt position
+                drawContext.canvas.nativeCanvas.apply {
+                    save() // spara canvasens nuvarande position
+                    // Rotera runt hjulets mittpunkt
+                    rotate(
+                        textAngle,
+                        size.width / 2f,
+                        size.height / 2f
+                    )
+
+                    // Rita texten i canvasen
+                    drawText(
+                        options[i], // texten
+                        size.width / 2f, // mitten av hjulet
+                        size.height / 2f - radius, // flytta uppåt från center
+                        Paint().apply {
+                            color = AndroidColor.WHITE
+                            textSize = 36f
+                            textAlign = android.graphics.Paint.Align.CENTER
+                            isFakeBoldText = true
+                        }
+                    )
+                    restore() // återställ canvasens position till innan roteringen
+
+                }
+
             }// )
         }
         Icon(
@@ -178,7 +214,7 @@ fun RoulettWheel(options: List<String>, onResult: (String) -> Unit) {
     val coroutineScope = rememberCoroutineScope()
 
     Button(onClick = {
-        if (options.isEmpty()) {
+        if (options.isEmpty()) return@Button // Om tom , Fixat Så den Funkar :)
         coroutineScope.launch {
             val randomRotation = (360 * 5) + (0..360).random() // Snurra 5 varv + slumpvinkel
             rotation.animateTo(
@@ -188,7 +224,7 @@ fun RoulettWheel(options: List<String>, onResult: (String) -> Unit) {
 
             val winningIndex = ((rotation.value % 360) / anglePerSection).toInt() % sectionCount
             onResult(options[winningIndex])
-        }
+
     }) {
         Text("Snurra!")
     }

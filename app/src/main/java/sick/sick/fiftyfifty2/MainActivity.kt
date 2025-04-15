@@ -80,40 +80,44 @@ class MainActivity : ComponentActivity() {
 }
 
 /**
+ * FiftyFiftyView :
+ * Här ser man FiftyFifty
+ *  @param navController - Navcontroller för att hantera navigering och state
+ *  @param viewModel - ViewModel för att hantera data
+ *  @param errorText - Felmeddelande
+ *  @param selectedOption - Valda alternativ
+ *  @param firstOption - Första val
+ *  @param secondOption - Andra val
+ *  @param keyboardController - Tangentbordet
+ *  @param secondFocusRequester - FocusRequester för andra textfältet
  *  @Composable betyder att den är en composable funktion
- *  fixat fel här navcontroller
- *  mer ? för composable funktion och navcontroller
- *  Kaffe?!
  */
 @SuppressLint("NewApi")
-@Composable // Annotering för att den är en composable funktion
+@Composable // Annotering för composable
 fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = viewModel()) {
     // håller användarens inmatade texter
     var firstOption by remember { mutableStateOf("") } // State för första val
     var secondOption by remember { mutableStateOf("") } // State för andra val
-    var errorText by remember { mutableStateOf("") } // används felmeddelande
+    var errorText by remember { mutableStateOf("") } // felmeddelande
     var selectedOption by remember { mutableStateOf("") } // lagrar valda alternativet
     // remember mutable state of - gör så att värderna uppdateras i compose
     val errorMessage = stringResource(id = R.string.error_text)
     //errorText = errorMessage
 
-    //todo testa här om det fungerar
-    val context = LocalContext.current // lol
+    val context = LocalContext.current // kontext för att starta motor
 
-    // Behövs detta? todo kolla om det fungerar
+    // TA BORT?
     val secondFocusRequester = remember { FocusRequester() } // gör så att tangentbordet försvinnerzz
     val keyboardController = LocalSoftwareKeyboardController.current // gör så att tangentbordet försvinnerzz
 
     Column (
         modifier = Modifier.fillMaxSize().padding(16.dp).imePadding().padding(bottom = 100.dp), // Lägger till padding samt gör så att tangentbordet försvinnerzz
         horizontalAlignment = Alignment.CenterHorizontally, // Centrerar horizontalt
-        //verticalArrangement = Arrangement.Center // Centrerar vertikalt
          verticalArrangement = Arrangement.Center,
-
     ) {
         Text(text = stringResource(id = R.string.title_FiftyFifty), // Hämtar text från strings.xml
-            fontSize = 50.sp, // storlek text
-            modifier = Modifier.padding(top = 30.dp) // Lägger till padding ovan
+            fontSize = 50.sp,
+            modifier = Modifier.padding(top = 30.dp)
             )
         /**
          * Två TextField används istället för EditText.
@@ -126,47 +130,47 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
             value = firstOption, // första valet
             onValueChange = { firstOption = it }, // uppdaterar första valet
             label = { Text(stringResource(id = R.string.first_Hint)) }, // hint
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Next), // tangentbord
-            modifier = Modifier.padding(top = 16.dp) // Lägger till padding ovan
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Next,
+                capitalization = androidx.compose.ui.text.input.KeyboardCapitalization.Sentences),
+            modifier = Modifier.padding(top = 16.dp)
         )
         TextField(
             value = secondOption, // second valet
-            onValueChange = { secondOption = it }, // uppdaterar första valet
+            onValueChange = { secondOption = it }, // uppdaterar andra valet
             label = { Text(stringResource(id = R.string.second_Hint)) }, // hint
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Done), // tangentbord
-            modifier = Modifier.padding(top = 16.dp) // Lägger till padding ovan
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Done,
+                capitalization = androidx.compose.ui.text.input.KeyboardCapitalization.Sentences),
+            modifier = Modifier.padding(top = 16.dp)
         )
         Button(
             onClick = {
-                if (firstOption.isBlank() || secondOption.isBlank()) { // om det är infyllt så skickas det vidare till selectedOption
-                    errorText = errorMessage // felmeddelande
+                if (firstOption.isBlank() || secondOption.isBlank()) { // Måste vara ifyllt för att gå vidare
+                    errorText = errorMessage // Felmeddelande
                 } else {
-                    val random1 = Random.nextInt(1, 100) // randomiserar
-                    val random2 = Random.nextInt(1, 100)
-                    // Det slumpmässiga valet som visas efter knapptryck
+                    val random1 = Random.nextInt(1, 100) // Random number generator
+                    val random2 = Random.nextInt(1, 100) // Random number generator
+                    // Det slumpmässiga valet som sparas efter knapptryck
                     selectedOption = if (random1 > random2) firstOption else secondOption
-                    //todo ändra till motor
 
-                    // !!!Spara resultat i databas
-                    val options = "$firstOption vs $secondOption" // valda alternativ som en sträng
-                    val formatter = java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm") // formatterar tiden
-                    val currentdate = java.time.LocalDateTime.now().format(formatter) // hämta nuvarande datum
-                    viewModel.insertHistory("FiftyFifty", options, selectedOption, currentdate) // spara resultat i databas
+                    // Spara resultat i databas
+                    val options = "$firstOption vs $secondOption" // Valda alternativ som en sträng
+                    val formatter = java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm") // Formatterar tiden
+                    val currentdate = java.time.LocalDateTime.now().format(formatter) // Hämta nuvarande datum
+                    viewModel.insertHistory("FiftyFifty", options, selectedOption, currentdate) // Spara resultat i databas
 
-
-                    //starta motor med valda option
+                    //Starta motor med valda option
                     val intent = Intent(context, Motor::class.java).apply {
-                        putExtra("EXTRA_MESSAGE", selectedOption) // skickar valda option till motor
-                        putExtra("SOURCE", "FiftyFifty") // SKA MED TILL MOTOR FÖR SKICKA om man vill ha source
+                        putExtra("EXTRA_MESSAGE", selectedOption) // Skickar valda option till motor
+                        putExtra("SOURCE", "FiftyFifty") // Ska med till motor för visa vilket den kommer ifån
                     }
-                    context.startActivity(intent) // starta motor med valda option som extra
+                    context.startActivity(intent) // Starta Motor
                 }
             },
-            modifier = Modifier.padding(top = 16.dp) // Lägger till padding ovan
+            modifier = Modifier.padding(top = 16.dp)
         ) {
-            Text(text = stringResource(id = R.string.button)) // knapptext
+            Text(text = stringResource(id = R.string.button)) // Knapptext
         }
-
+        // Todo behövs inte?
         if (errorText.isNotBlank()) {
             Text(errorText, color = MaterialTheme.colorScheme.error, fontSize = 18.sp)
         }
@@ -181,7 +185,7 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
 }
 
 /**
- *  bottom navigation bar
+ *  Bottom navigation bar
  *  "@Composable" betyder att det är en composable funktion
  *   @param navController - Navcontroller för att hantera navigering och state
  */
@@ -200,9 +204,9 @@ fun FiftyFiftyApp(startDestination: String, historyViewModel: HistoryViewModel) 
         ) {
             composable("FiftyFifty") { FiftyFiftyView(navController, historyViewModel) }
             composable("MoreChoices") { MoreChoices(viewModel = historyViewModel) } // nya sida för val av alternativ i motor?
-            composable("Roulette") { Roulette() } // roulette är en ny sida
+            //composable("Roulette") { Roulette() } // roulette är en ny sida
             composable("History") { HistoryScreen(viewModel = historyViewModel) } //FIXAT! historik är en ny sida
-            composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
+            //composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
         }
     }
 }
@@ -230,13 +234,13 @@ fun BottomNavigationBar(navController: NavController) {
             onClick = { navController.navigate("MoreChoices") }
         )
         // lägg till fler navigeringar här om det behövs
-        /**
-        NavigationBarItem(
-            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Roulette") },
-            label = { Text("Roulette") },
-            selected = navController.currentDestination?.route == "Roulette",
-            onClick = { navController.navigate("Roulette") }
-        ) */
+        
+//        NavigationBarItem(
+//            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Roulette") },
+//            label = { Text("Roulette") },
+//            selected = navController.currentDestination?.route == "Roulette",
+//            onClick = { navController.navigate("Roulette") }
+//        )
         NavigationBarItem(
             icon = { Icon(Icons.Filled.History, contentDescription = "History") },
             label = { Text("History") },
@@ -265,22 +269,21 @@ fun MoreChoices(viewModel: HistoryViewModel) {
      */
 }
 
-@Composable
-fun Roulette() {
-    Text(text = "Roulette")
-    RouletteScreen() // visa roulette i motor
-}
+//@Composable
+//fun Roulette() {
+//    Text(text = "Roulette")
+//    RouletteScreen() // visa roulette i motor
+//}
 
 @Composable
 fun HistoryScreen(viewModel: HistoryViewModel) {
-    // todo skriv historik
     History(viewModel) // historik är en ny sida som visar resultat från körningar i en lista eller en grid.
 }
 
-@Composable
-fun SettingsScreen() {
-    Text(text = "Roulette")
-    //SocialWindow() -  För socialfunktionen ...
-    //TestImeActionNext() // för imeaction
-}
+//@Composable
+//fun SettingsScreen() {
+//    Text(text = "Roulette")
+//    //SocialWindow() -  För socialfunktionen ...
+//    //TestImeActionNext() // för imeaction
+//}
 

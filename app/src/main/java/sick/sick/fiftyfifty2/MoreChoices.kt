@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
@@ -63,6 +64,9 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
         TextField(
             value = inText.value,
             onValueChange = { inText.value = it }, // uppdaterar inText varje gång?
+            keyboardOptions = KeyboardOptions.Default.copy( // Stor bokstav
+                capitalization = androidx.compose.ui.text.input.KeyboardCapitalization.Sentences
+            ),
             label = { Text("Add Choices") }, // hint
             modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan todo fel ? padding
             // ska jag ha detta row?
