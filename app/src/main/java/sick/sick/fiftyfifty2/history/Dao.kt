@@ -15,15 +15,15 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface HistoryDao {
-    // infogar  en ny post till databasen
+    // Lägger till en historyEntity i databasen
     @Insert
     suspend fun insert(historyEntity: HistoryEntity)
 
-    // hämtar alla post från databasen i ordning
+    // Hämtar alla historyEntity från databasen och sorterar dem efter id i fallande ordning
     @Query("SELECT * FROM history_table ORDER BY id DESC")
     fun getAllHistory(): Flow<List<HistoryEntity>>
 
-    // rensar databasen och tar bort alla post
+    // Rensar hela databasen
     @Query ("DELETE FROM history_table")
     suspend fun clearHistory()
 }

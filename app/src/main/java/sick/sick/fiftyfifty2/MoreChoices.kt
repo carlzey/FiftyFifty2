@@ -49,27 +49,26 @@ import com.google.accompanist.flowlayout.FlowRow
 @Composable
 fun moreChoicesView(viewModel: HistoryViewModel) {
 
-    var choices = remember { mutableStateListOf<String>() } // lagrar valda alternativ i en lista
-    var inText = remember { mutableStateOf("") } // används för att lagra inmatade text
-    var valdText = remember { mutableStateOf("") } // används för att visa valda text
-    val context = LocalContext.current // Nytt::::::::::För att starta ny aktivitet
+    var choices = remember { mutableStateListOf<String>() } // Lagrar valda alternativ i en lista
+    var inText = remember { mutableStateOf("") } // Används för att lagra inmatade text
+    var valdText = remember { mutableStateOf("") } // Vald Text för att skicka till Motor
+    val context = LocalContext.current // Kontext för att starta motor
 
     Column (
         modifier = Modifier.fillMaxSize().padding(16.dp).padding(bottom = 100.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("More Choices", fontSize = 50.sp)
+        Text("More Choices", fontSize = 50.sp) // Titeln
 
         TextField(
             value = inText.value,
-            onValueChange = { inText.value = it }, // uppdaterar inText varje gång?
+            onValueChange = { inText.value = it }, // Uppdaterar inText varje gång användaren skriver
             keyboardOptions = KeyboardOptions.Default.copy( // Stor bokstav
                 capitalization = androidx.compose.ui.text.input.KeyboardCapitalization.Sentences
             ),
-            label = { Text("Add Choices") }, // hint
-            modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan todo fel ? padding
-            // ska jag ha detta row?
+            label = { Text("Add Choices") }, // Hint
+            modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan
         )
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -83,25 +82,24 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                     // inputText = "" // Nollställ fältet efter tillägg
                 }
             }) {
-                Text("Add") // knapptext för att lägga till fler alternativ
-            } // slut på row
-            Button(onClick = { choices.clear() }) { // tömmer lista
-                Text("Clear") // knapptext för att ta bort alla alternativ???!!! todo
+                Text("Add") // Lägg till
+            } // Slut på row
+            Button(onClick = { choices.clear() }) { // Tömmer lista
+                Text("Clear")
             }
         }
-            //knapp slumpa och visa valda alternativ
+            //knapp slumpa och skicka till Motor
             Button(
                 onClick = {
                     if (choices.isNotEmpty()) {
-                        valdText.value = choices.random() // slumpmässigt valda alternativ
-                        val selectedChoice = valdText.value // sparar valdText i selectedChoice
-                        val joined = choices.joinToString(",    ") // Gjort Lite Bredare!
-                        val formatter = java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm") // formatterar tiden
-                        val currentDate = java.time.LocalDateTime.now().format(formatter) // hämta nuvarande datum
-                        //val currentDate = java.time.LocalDateTime.now().toString() // hämta nuvarande datum
-                        viewModel.insertHistory("MoreChoices", joined, selectedChoice, currentDate) // spara resultat i databas
+                        valdText.value = choices.random() // Slumpmässigt valda alternativ
+                        val selectedChoice = valdText.value // Sparar valdText i selectedChoice
+                        val joined = choices.joinToString(",    ") // Bredd
+                        val formatter = java.time.format.DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm")
+                        val currentDate = java.time.LocalDateTime.now().format(formatter) // Hämta nuvarande datum
+                        viewModel.insertHistory("MoreChoices", joined, selectedChoice, currentDate) // Spara resultat i Historik
 
-                        //starta aktivitet
+                        //Starta aktivitet
                         val intent = Intent(context, Motor::class.java).apply { 
                             putExtra(
                                 "EXTRA_MESSAGE",
@@ -110,50 +108,38 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                             putExtra(
                                 "SOURCE",
                                 "MoreChoices"
-                            ) // SKA MED TILL MOTOR FÖR SKICKA RÄTT TIBLAKA!!!!!!!!!!!!
+                            ) // skickar vilken den kommer från till motor
                         }
-                        context.startActivity(intent) // starta motor med valda option som extra
+                        context.startActivity(intent) // Startar motor med valda option som extra
 
                     }
                 },
-                modifier = Modifier.padding(top = 2.dp) // todo ====????styledpadding
+                modifier = Modifier.padding(top = 2.dp)
 
             ) {
-                // go
                 Text("Randomize!")
             }
-
-        // Testa Flowrow
+        // Flowrow för att visa Design Så det blir snyggt
         FlowRow(
             mainAxisSpacing = 8.dp,
             crossAxisSpacing = 8.dp,
-            modifier = Modifier.padding(top = 8.dp) // Lägger till padding ovan
+            modifier = Modifier.padding(top = 8.dp)
             ,
 
-        ) //({  }
-
-        /**
-         * Flyttat så att alternativen ligger under för underlätta
-         *
-         */
-//
-//
+        )
             {
-            choices.forEach { choice -> // loopa genom valda alternativ och visa dem
+            choices.forEach { choice -> // Loopa genom valda alternativ och visa dem
                 Box(
                     modifier =
                     Modifier.background(MaterialTheme.colorScheme.primaryContainer).clip(RoundedCornerShape(12.dp))
                         .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp))
                         .padding(horizontal = 12.dp, vertical = 12.dp)
-                    // Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
                 ) {
                     Text(
                         choice, fontSize = 20.sp, color = MaterialTheme.colorScheme.primary, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 10F))
-
-                    ) // todo ?
+                    )
                 }
             }
-
         }
         }
     }

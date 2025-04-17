@@ -38,16 +38,8 @@ import sick.sick.fiftyfifty2.history.HistoryViewModel
 @Composable
 fun History(viewModel: HistoryViewModel = viewModel()) {
 
-    // fixade fel här collectasstate för att fånga värdet
+    // Kolla om vi har några resultat i databasen
     val historyList = viewModel.allHistory.collectAsState(initial = emptyList()).value
-
-//    //val historyList = listOf(
-//        HistoryItem("FiftyFifty", "1 vs 2", "1", "2023-05-15"),
-//        HistoryItem("FiftyFifty2", "1 vs 2", "2", "2023-05-15"),
-//        HistoryItem("MoreChoices", "1,2,3,4,5", "3", "2023-05-15"),
-//        HistoryItem("Roulette", "sol,vatten,snö,gröt,katt", "katt", "2023-05-15")
-//    )
-
 
     Scaffold(
         topBar = {
@@ -56,7 +48,6 @@ fun History(viewModel: HistoryViewModel = viewModel()) {
                 )
 
         },
-
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { viewModel.clearHistory() }
@@ -64,7 +55,7 @@ fun History(viewModel: HistoryViewModel = viewModel()) {
                 Text("Clear")
             }}
 
-    ) { padding -> // Lägg till padding values
+    ) { padding ->
         LazyColumn( modifier = Modifier
             .fillMaxSize()
             .padding(padding)
@@ -77,8 +68,13 @@ fun History(viewModel: HistoryViewModel = viewModel()) {
         }
     }
 
+/**
+ * HistoryItemView visar en rad i historiklista
+ * Vi kör Card för att få en snygg Design
+ *
+ */
 @Composable
-fun HistoryItemView(item: HistoryEntity) { //
+fun HistoryItemView(item: HistoryEntity) {
     Card (
         modifier = Modifier.padding(8.dp) // Lägg till padding mellan element
             .fillMaxWidth(),
@@ -87,25 +83,24 @@ fun HistoryItemView(item: HistoryEntity) { //
         ) {
         Column(
             modifier = Modifier.padding(16.dp)
-        ) {
+        ) { // Alternativ och Vald
             Text(text = item.game, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-            Text(text = item.options) // ta bort Choices: "${item.options}")
-            // snyggat till det här!
+            Text(text = item.options)
+
             Text(buildAnnotatedString {
-                append("Fate chose ---> ")
+                append("Fate chose ---> ") // Texten innan valda alternativet
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                     append(item.chosenOption)
                 }
             })
-            Text(text = "Date: ${item.date}", style = MaterialTheme.typography.labelSmall) // fix?
+            Text(text = "Date: ${item.date}", style = MaterialTheme.typography.labelSmall) // Datum
         }
 
          }
 }
 
 /**
- *  data class för att spara resultat och datum i en databas
- *  @sample HistoryItem("FiftyFifty", "1 vs 2", 1,  "2023-05-15")
+ *  Data class för att spara resultat och datum i en databas
  */
 data class HistoryItem(val game: String, val options: String, val chosenOption: String, val date: String)
 

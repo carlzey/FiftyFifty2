@@ -14,71 +14,60 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+/**
+ * MotorActivity för att visa valda alternativ
+ * Här Visas valda alternativ samt en knapp för att gå tillbaka till där det kommer
+ * ifrån.
+ */
 class Motor : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Get the selected option from the intent
-        val selectedOption = intent.getStringExtra("EXTRA_MESSAGE") ?: "" // fixar fel
-        val source = intent.getStringExtra("SOURCE") ?: "" // SÅ DEN VET VAR DEN KOMMER FRÅN
+        // Hämta valt alternativ från Intent
+        val selectedOption = intent.getStringExtra("EXTRA_MESSAGE") ?: ""
+        val source = intent.getStringExtra("SOURCE") ?: "" // Vilken activity den kom ifrån
 
         setContent {
-            // Set the content of the activity
-        MotorView(selectedOption, source) // lagt till source
+        MotorView(selectedOption, source) // Val och Source skickade till MotorView
         }
     }
 }
-
 /**
- *
+ * MotorView För att visa valda alternativ
+ * @param selectedOption - Valda alternativ
+ * @param source - Var den kommer ifrån
  */
 @Composable
-fun MotorView(selectedOption: String, source: String) { // Tar emot valda option +även source!
-    val context = LocalContext.current
-
+fun MotorView(selectedOption: String, source: String) {
+    val context = LocalContext.current // Kontext
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp).padding(bottom = 100.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-//        Text(
-//            text = stringResource(id = R.string.selectedChoice), // Visar valda option
-//            fontSize = 50.sp,
-//            modifier = Modifier.padding(bottom = 8.dp)
-//        )
         Text(
-            selectedOption,
-            fontSize = 50.sp, // ändrat från 32
+            selectedOption, // Valet
+            fontSize = 50.sp,
             color = MaterialTheme.colorScheme.primary
         )
-
-        // Dela upp? todo vad?
         Spacer(modifier = Modifier.height(24.dp))
-       /**
-         * OK
-         * lägg till om flera senare
-         * else if (source == "FiftyFifty") { // Om den kom från FiftyFifty
-         */
+       // Tillbaka knapp som kör if else till rätt activity
         Button(
             onClick = {
-                if (source == "MoreChoices") { // Om den kom från MoreChoices
+                if (source == "MoreChoices") { // Morechoices
                     val intent = Intent(context, MainActivity::class.java).apply {
                         putExtra("NAVIGATE_TO", "MoreChoices") // Lägger till extra för att gå till MoreChoices
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TOP // Tar bort tidigare aktiviteter
                     }
-                    context.startActivity(intent) // Starta MoreChoices//tabort??????
-                } // if
+                    context.startActivity(intent) // Starta MoreChoices
+                }
                 else { // Om den kom från FiftyFifty
                     context.startActivity(Intent(context, MainActivity::class.java))
                 }
             }
         ) {
-            Text(stringResource(R.string.motor_back)) //
+            Text(stringResource(R.string.motor_back)) // Tillbaka Knapp
         }
-
-
     }
-
-
 }

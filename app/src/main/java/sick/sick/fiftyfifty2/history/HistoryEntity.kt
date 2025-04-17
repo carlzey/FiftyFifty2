@@ -17,8 +17,8 @@ import androidx.room.PrimaryKey
 data class HistoryEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0, // autoincrementPrimaryKey för att generera unika id för varje rad i tabellen.
-    val game: String, // game är varifrån spelet hämtats från (FiftyFifty, FiftyFifty2, MoreChoices, Roulette)
-    val options: String, // options är alternativen som spelaren kan välja
-    val chosenOption: String, // chosenOption är det som genererades av AI-modellen
-    val date: String // date är tiden spelet valdes och genererades
+    val game: String, // FiftyFifty, FiftyFifty2, MoreChoices, Roulette)
+    val options: String, // Alternativ
+    val chosenOption: String, // Valt alternativ
+    val date: String // Datum
 )

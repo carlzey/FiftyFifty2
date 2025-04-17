@@ -15,10 +15,11 @@ import kotlinx.coroutines.launch
  *  så det är en viewModel som ärver från ViewModel
  */
 class HistoryViewModel(private val repository: Repository) : ViewModel() {
-    val allHistory = repository.allHistory
+    val allHistory = repository.allHistory // All historik från databasen
 
     /**
-     * insertHistory skapar en HistoryEntity och sparar den i Room-databasen.
+     * InsertHistory skapar en HistoryEntity och sparar den i Room-databasen.
+     * Lägger till
      *
      * Den körs i en viewModelScope.launch så att den inte blockerar UI.
      * inskick history till databasen och körs i en coroutine
@@ -29,22 +30,26 @@ class HistoryViewModel(private val repository: Repository) : ViewModel() {
             options = options,
             chosenOption = chosenOption,
             date = date)
-        //insert(historyEntity)
+        // Launch
         viewModelScope.launch {
             repository.insert(historyEntity)
         }
     }
-
-    // infogar  en ny post till databasen och körs i en coroutine
+    // Infogar  till databasen och körs i en coroutine
     fun insert(historyEntity: HistoryEntity) = viewModelScope.launch {
         repository.insert(historyEntity)
     }
-    // rensar databasen och tar bort alla post och körs i en coroutine
+    // Rensar databasen
     fun clearHistory() = viewModelScope.launch {
         repository.clearHistory()
     }
     }
 
+/**
+ * HistoryViewModelFactory skapar en HistoryViewModel.
+ * Factory för HistoryViewModel
+ * Den gör det så att vi kan skicka in repository till viewModel
+ */
 class HistoryViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HistoryViewModel::class.java)) {

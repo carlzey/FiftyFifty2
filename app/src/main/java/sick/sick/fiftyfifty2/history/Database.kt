@@ -18,10 +18,9 @@ import sick.sick.fiftyfifty2.vote.Vote
  *
  * Nu lägger vi till Vote och choice i databasen. också för röstningsfunktioner
  */
-//@Database(entities = [HistoryEntity::class], version = 1, exportSchema = false)
 @Database(entities = [HistoryEntity::class, Question::class, Vote::class], version = 2, exportSchema = false)
-@TypeConverters(Converters::class) // gör det möjligt att lagra List<String> i Room databasen
-abstract class HistoryDatabase : RoomDatabase() { // abstrakt klass som ärver från RoomDatabase
+@TypeConverters(Converters::class) // Gör det möjligt att lagra List<String> i Room databasen
+abstract class HistoryDatabase : RoomDatabase() { // Databas
     abstract fun historyDao(): HistoryDao // Dao för historik
     abstract fun voteDao(): VoteDao // Dao för röster
     abstract fun questionDao(): QuestionDao // Dao för val Community Choices
@@ -29,14 +28,14 @@ abstract class HistoryDatabase : RoomDatabase() { // abstrakt klass som ärver f
 
     companion object {
         @Volatile
-        private var INSTANCE: HistoryDatabase? = null // en instans av HistoryDatabase
+        private var INSTANCE: HistoryDatabase? = null // En instans av HistoryDatabase
 
         /**
-         * Funktion som returnerar en instans av databasen.
+         * Funktion som hämtar en singleton-instans av databasen
          * @param context Applikationskontexten.
          * @return En singleton-instans av databasen.
          */
-        fun getDatabase(context: Context): HistoryDatabase { // FIX: Lagt till returtyp
+        fun getDatabase(context: Context): HistoryDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

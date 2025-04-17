@@ -104,7 +104,7 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
     val errorMessage = stringResource(id = R.string.error_text)
     //errorText = errorMessage
 
-    val context = LocalContext.current // kontext för att starta motor
+    val context = LocalContext.current // Kontext för att starta motor
 
     // TA BORT?
     val secondFocusRequester = remember { FocusRequester() } // gör så att tangentbordet försvinnerzz
@@ -187,55 +187,51 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
 /**
  *  Bottom navigation bar
  *  "@Composable" betyder att det är en composable funktion
- *   @param navController - Navcontroller för att hantera navigering och state
+ *   @param startDestination - Startdestination för navigering
+ *   @param historyViewModel - ViewModel för att hantera data till historik
  */
 @Composable
-fun FiftyFiftyApp(startDestination: String, historyViewModel: HistoryViewModel) { // fixat ävenn viewmodel nu
-    val navController = rememberNavController() // navigering  todo kolla om det fungerar
+fun FiftyFiftyApp(startDestination: String, historyViewModel: HistoryViewModel) {
+    val navController = rememberNavController() // Navcontroller för att hantera navigering och state
     Scaffold(
         bottomBar = {
             BottomNavigationBar(navController)
         }
     ) { innerPadding ->
-        NavHost( // gör navigering
-            navController = navController, // navcontroller för att hantera navigering och state
-            startDestination = startDestination, // start sida är FiftyFifty
+        NavHost( // Navhost är en container för navigering
+            navController = navController, // Navcontroller för att hantera navigering och state
+            startDestination = startDestination, // Start sidan är FiftyFifty
             modifier = Modifier.padding(innerPadding)
         ) {
             composable("FiftyFifty") { FiftyFiftyView(navController, historyViewModel) }
-            composable("MoreChoices") { MoreChoices(viewModel = historyViewModel) } // nya sida för val av alternativ i motor?
-            //composable("Roulette") { Roulette() } // roulette är en ny sida
-            composable("History") { HistoryScreen(viewModel = historyViewModel) } //FIXAT! historik är en ny sida
-            //composable("Inställningar") { SettingsScreen() } // inställningar är en ny sida
+            composable("MoreChoices") { MoreChoices(viewModel = historyViewModel) }
+            //composable("Roulette") { Roulette() }
+            composable("History") { HistoryScreen(viewModel = historyViewModel) }
+            //composable("Inställningar") { SettingsScreen() }
         }
     }
 }
 
 /**
- *  bottom navigation bar för att navigera mellan sidorna i appen med Material Design
- *
- *
- *  Ändrat till NavigationbarItem istället för NavigationBarItem för att få det att fungera
+ *  Bottom navigation bar för att navigera mellan sidorna i appen med Material Design
+ *  @param navController - Navcontroller för att hantera navigering och state
  */
 @Composable
 fun BottomNavigationBar(navController: NavController) {
-    NavigationBar { // navigering 1-3
-        NavigationBarItem( // item 1
-            icon = { Icon(Icons.Default.Balance, contentDescription = "FiftyFifty") }, // ikon
-            label = { Text("FiftyFifty") }, // namn på sida
-            selected = navController.currentDestination?.route == "FiftyFifty", // kolla om sidan är valda
-            onClick = { navController.navigate("FiftyFifty") } // navigerar till FiftyFifty
+    NavigationBar { // Navigering Alternativ
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Balance, contentDescription = "FiftyFifty") }, // Ikon
+            label = { Text("FiftyFifty") }, // Namn
+            selected = navController.currentDestination?.route == "FiftyFifty", // Destinationen
+            onClick = { navController.navigate("FiftyFifty") } // Navigerar till
         )
-        // lägg till fler navigeringar här om det behövs
         NavigationBarItem(
             icon = { Icon(Icons.Default.Tune, contentDescription = "MoreChoices") },
             label = { Text("MoreChoices") },
             selected = navController.currentDestination?.route == "MoreChoices",
             onClick = { navController.navigate("MoreChoices") }
         )
-        // lägg till fler navigeringar här om det behövs
-        
-//        NavigationBarItem(
+//        NavigationBarItem( Inaktiv!
 //            icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Roulette") },
 //            label = { Text("Roulette") },
 //            selected = navController.currentDestination?.route == "Roulette",
@@ -247,7 +243,7 @@ fun BottomNavigationBar(navController: NavController) {
             selected = navController.currentDestination?.route == "History",
             onClick = { navController.navigate("History") }
         )
-        /**
+        /** Inaktiv!
         NavigationBarItem(
             icon = { Icon(painterResource(id = android.R.drawable.arrow_down_float), contentDescription = "Inställningar") },
             label = { Text("Inställningar") },
@@ -259,28 +255,19 @@ fun BottomNavigationBar(navController: NavController) {
 }
 @Composable
 fun MoreChoices(viewModel: HistoryViewModel) {
-    Text(text = "MoreanChoices")
-    moreChoicesView(viewModel) // visa nya alternativ i motor
-    /**
-     * morechoices är en ny sida som visar alternativ som användaren kan välja fler gånger
-     * med mer och mer alternativ som visas i en lista eller en grid.
-     * Bra att skriva mer info om vad som händer här
-     * Tack
-     */
+    Text(text = "MoreanChoices") // Todo Ha kvar?
+    moreChoicesView(viewModel)
 }
-
-//@Composable
+//@Composable Inaktiv!
 //fun Roulette() {
 //    Text(text = "Roulette")
 //    RouletteScreen() // visa roulette i motor
 //}
-
 @Composable
 fun HistoryScreen(viewModel: HistoryViewModel) {
-    History(viewModel) // historik är en ny sida som visar resultat från körningar i en lista eller en grid.
+    History(viewModel)
 }
-
-//@Composable
+//@Composable Inaktiv!
 //fun SettingsScreen() {
 //    Text(text = "Roulette")
 //    //SocialWindow() -  För socialfunktionen ...

@@ -7,15 +7,14 @@ import kotlinx.coroutines.flow.Flow
  * 🔹 Repository är ett lager mellan databasen och UI.
  */
 class Repository(private val historyDao: HistoryDao) {
-    val allHistory: Flow<List<HistoryEntity>> = historyDao.getAllHistory() // hämtar alla post från databasen i ordning
+    val allHistory: Flow<List<HistoryEntity>> = historyDao.getAllHistory() // Hämtar all Historik
 
-    // infogar  en ny post till databasen
+    // Lägger till
     suspend fun insert(historyEntity: HistoryEntity) {
-        historyDao.insert(historyEntity) // infogar  en ny post till databasen
+        historyDao.insert(historyEntity) // Insert
     }
-
-    // rensar databasen och tar bort alla post
+    // Rensar databasen och tar bort i historiken
     suspend fun clearHistory() {
-        historyDao.clearHistory() // rensar databasen och tar bort alla post
+        historyDao.clearHistory()
     }
 }
