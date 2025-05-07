@@ -255,7 +255,6 @@ fun BottomNavigationBar(navController: NavController) {
 }
 @Composable
 fun MoreChoices(viewModel: HistoryViewModel) {
-    Text(text = "MoreanChoices") // Todo Ha kvar?
     moreChoicesView(viewModel)
 }
 //@Composable Inaktiv!

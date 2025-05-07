@@ -136,7 +136,7 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
                         .padding(horizontal = 12.dp, vertical = 12.dp)
                 ) {
                     Text(
-                        choice, fontSize = 20.sp, color = MaterialTheme.colorScheme.primary, modifier = Modifier.background(MaterialTheme.colorScheme.background.copy(alpha = 10F))
+                        choice, fontSize = 10.sp, color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
