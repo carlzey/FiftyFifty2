@@ -3,7 +3,7 @@
     <string name="title_FiftyFifty">FiftyFifty</string>
     <string name="first_Hint">First Choice</string>
     <string name="second_Hint">Second Choice</string>
-    <string name="error_text">You\'ll have to enter both TextFields!</string>
+    <string name="error_text">You must fill in both fields!</string>
     <string name="button">Fifty/Fifty</string>
     <string name="selectedChoice">Selected choice:</string>
     <string name="motor_back">Go Back</string>

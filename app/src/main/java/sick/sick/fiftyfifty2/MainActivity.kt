@@ -166,7 +166,8 @@ fun FiftyFiftyView(navController: NavController, viewModel: HistoryViewModel = v
                     context.startActivity(intent) // Starta Motor
                 }
             },
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.padding(top = 16.dp),
+            enabled = firstOption.isNotBlank() && secondOption.isNotBlank() // Om det är ifyllt så är knappen inaktivt
         ) {
             Text(text = stringResource(id = R.string.button)) // Knapptext
         }

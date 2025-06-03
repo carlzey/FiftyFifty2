@@ -44,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
@@ -76,7 +77,7 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
-                .offset(y = (-220).dp)
+                .offset(y = (-180).dp)
                 .height(130.dp)
                 .verticalScroll(scrollState, reverseScrolling = true)
         ) {
@@ -136,6 +137,9 @@ fun moreChoicesView(viewModel: HistoryViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Text(text = "", // Hämtar text från strings.xml
+            fontSize = 50.sp
+        )
         TextField(
             value = inText.value,
             onValueChange = { inText.value = it }, // Uppdaterar inText varje gång användaren skriver
